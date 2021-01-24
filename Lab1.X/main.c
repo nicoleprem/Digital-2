@@ -26,11 +26,56 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
+//*****************************************************************************
+//Prototipos de funciones
+//*****************************************************************************
+void setup (void);
+void semaforo (void); 
+
+//*****************************************************************************
+//Variables
+//*****************************************************************************
+#define LEDR PORTEbits.RE0 //Led Rojo
+#define LEDA PORTEbits.RE1 //Led Amarillo
+#define LEDV PORTEbits.RE2 //Led verde
+#define _XTAL_FREQ 8000000 //Frecuencia de eintrada
 
 
 
 #include <xc.h>
 
 void main(void) {
-    return;
+    setup ();
+    while (1){
+        semaforo ();
+            
+    
+    }
+
+}
+
+
+void setup (void) {
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISE = 0; //Puerto de los LEDS          
+}
+
+//Rutina para que se haga el inicio de la carrera con semaforo
+void semaforo (void) {
+        LEDR=1;
+        LEDA=0;
+        LEDV=0;
+        __delay_ms(500);
+        
+        LEDR=0;
+        LEDA=1;
+        LEDV=0;
+        __delay_ms(500);
+        
+        LEDR=0;
+        LEDA=0;
+        LEDV=1;
+        __delay_ms(500);
+
 }
