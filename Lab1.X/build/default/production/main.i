@@ -26,12 +26,6 @@
 
 
 
-
-
-
-void setup (void);
-void semaforo (void);
-# 45 "main.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2512,41 +2506,181 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 45 "main.c" 2
+# 28 "main.c" 2
 
+
+
+
+void setup(void);
+void semaforo(void);
+void ledsJ1(unsigned char C1);
+void ledsJ2(unsigned char C2);
+
+
+
+
+
+
+
+unsigned char C1;
+unsigned char C2;
+
+unsigned char contadorJ1 = 0;
+unsigned char contadorJ2 = 0;
+unsigned int bandera = 1;
 
 void main(void) {
-    setup ();
-    while (1){
-        semaforo ();
 
+    while (1) {
+        setup();
+        contadorJ1 = 0;
+        contadorJ2 = 0;
+        bandera = 1;
+        if (PORTBbits.RB0 == 0) {
+            semaforo();
+
+            while (bandera == 1) {
+
+                if (PORTAbits.RA0 == 0) {
+                    _delay((unsigned long)((50)*(8000000/4000.0)));
+                    if (PORTAbits.RA0 == 1) {
+                        contadorJ1++;
+                        ledsJ1(contadorJ1);
+                        if (contadorJ1 == 8) {
+                            _delay((unsigned long)((200)*(8000000/4000.0)));
+                            bandera = 2;
+                        }
+                    }
+                } else if (PORTAbits.RA1 == 0) {
+                    _delay((unsigned long)((50)*(8000000/4000.0)));
+                    if (PORTAbits.RA1 == 1) {
+                        contadorJ2++;
+                        ledsJ2(contadorJ2);
+
+                        if (contadorJ2 == 8) {
+                            _delay((unsigned long)((200)*(8000000/4000.0)));
+                            bandera = 2;
+                        }
+                    }
+
+                }
+
+            }
+
+        }
 
     }
 
 }
 
-
-void setup (void) {
+void setup(void) {
     ANSEL = 0;
     ANSELH = 0;
     TRISE = 0;
+    TRISC = 0;
+    TRISD = 0;
+    TRISB = 0b00000001;
+    TRISA = 0b00000011;
+    PORTE = 0;
+    PORTC = 0;
+    PORTD = 0;
+    PORTB = 0;
+    PORTA = 0;
 }
 
 
-void semaforo (void) {
-        PORTEbits.RE0=1;
-        PORTEbits.RE1=0;
-        PORTEbits.RE2=0;
+
+void semaforo(void) {
+    PORTEbits.RE0 = 1;
+    PORTEbits.RE1 = 0;
+    PORTEbits.RE2 = 0;
+    _delay((unsigned long)((500)*(8000000/4000.0)));
+
+    PORTEbits.RE0 = 0;
+    PORTEbits.RE1 = 1;
+    PORTEbits.RE2 = 0;
+    _delay((unsigned long)((500)*(8000000/4000.0)));
+
+    PORTEbits.RE0 = 0;
+    PORTEbits.RE1 = 0;
+    PORTEbits.RE2 = 1;
+    _delay((unsigned long)((500)*(8000000/4000.0)));
+}
+
+
+
+void ledsJ1(unsigned char C1) {
+    if (C1 == 8) {
+        PORTBbits.RB2 = 1;
+        PORTC = 0b10000000;
         _delay((unsigned long)((500)*(8000000/4000.0)));
 
-        PORTEbits.RE0=0;
-        PORTEbits.RE1=1;
-        PORTEbits.RE2=0;
-        _delay((unsigned long)((500)*(8000000/4000.0)));
+    } else if (C1 == 1) {
+        PORTC = 0b00000001;
+    } else if (C1 == 2) {
+        PORTC = 0b00000010;
+    } else if (C1 == 3) {
+        PORTC = 0b00000100;
+    } else if (C1 == 4) {
+        PORTC = 0b00001000;
+    } else if (C1 == 5) {
+        PORTC = 0b00010000;
+    } else if (C1 == 6) {
+        PORTC = 0b00100000;
+    } else if (C1 == 7) {
+        PORTC = 0b01000000;
+    }
+# 184 "main.c"
+}
 
-        PORTEbits.RE0=0;
-        PORTEbits.RE1=0;
-        PORTEbits.RE2=1;
+
+
+void ledsJ2(unsigned char C2) {
+    if (C2 == 8) {
+        PORTBbits.RB3 = 1;
+        PORTD = 0b10000000;
         _delay((unsigned long)((500)*(8000000/4000.0)));
+    }
+# 209 "main.c"
+    switch (C2) {
+        case 1:
+            PORTDbits.RD0 = 1;
+
+            break;
+        case 2:
+            PORTDbits.RD0 = 0;
+            PORTDbits.RD1 = 1;
+
+            break;
+        case 3:
+            PORTDbits.RD1 = 0;
+            PORTDbits.RD2 = 1;
+
+            break;
+        case 4:
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 1;
+
+            break;
+        case 5:
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 1;
+
+            break;
+        case 6:
+            PORTDbits.RD4 = 0;
+            PORTDbits.RD5 = 1;
+
+            break;
+        case 7:
+            PORTDbits.RD5 = 0;
+            PORTDbits.RD6 = 1;
+
+            break;
+    }
+
+
+
+
 
 }
