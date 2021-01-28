@@ -106,9 +106,6 @@ void main(void) {
     }
 
 }
-
-
-
 //Rutina para que se haga el inicio de la carrera con semaforo
 
 void semaforo(void) {
@@ -209,4 +206,3 @@ void ledsJ2(unsigned char C2) {
             break;
     }
 }
-
