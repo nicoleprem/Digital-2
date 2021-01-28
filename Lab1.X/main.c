@@ -29,10 +29,10 @@
 //*****************************************************************************
 //Prototipos de funciones
 //*****************************************************************************
-void setup(void);
-void semaforo(void);
-void ledsJ1(unsigned char C1);
-void ledsJ2(unsigned char C2);
+void setup(void); 
+void semaforo(void); //función para desplegar la secuencia de semáforo
+void ledsJ1(unsigned char C1); //función para controlar los les del jugagor 1
+void ledsJ2(unsigned char C2); //función para controlar los leds del jugador 2
 //*****************************************************************************
 //Variables
 //*****************************************************************************
@@ -40,46 +40,62 @@ void ledsJ2(unsigned char C2);
 #define LEDA PORTEbits.RE1 //Led Amarillo
 #define LEDV PORTEbits.RE2 //Led verde
 #define _XTAL_FREQ 8000000 //Frecuencia de eintrada
-unsigned char C1;
-unsigned char C2;
-
+unsigned char C1; //parámetro de entrada para función de leds J1
+unsigned char C2; //parámetro de entrada para función de leds J2
 unsigned char contadorJ1 = 0; //Contador del jugador 1, si llega a 8 gana
 unsigned char contadorJ2 = 0; //Contador del jugador 2, si llega a 8 gana
-unsigned int bandera = 1;
+unsigned int bandera = 1; //bandera para identificar al ganador
 
+//*****************************************************************************
+//Declaración de entradas, salidas y limpieza de puertos
+//*****************************************************************************
+void setup(void) {
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISE = 0; //Puerto de los LEDS  
+    TRISC = 0; //Puerto LEDS jugador 1
+    TRISD = 0; //Puerto LEDS jugador 2
+    TRISB = 0b00000001; //Puerto de botón semáforo e indicador del ganador
+    TRISA = 0b00000011; //Puerto para botones de los jugadores
+    //Limpieza de puertos:
+    PORTE = 0;
+    PORTC = 0;
+    PORTD = 0;
+    PORTB = 0;
+    PORTA = 0;
+}
 void main(void) {
 
     while (1) {
         setup();
+        //condiciones iniciales de los contadores de los jugadores
         contadorJ1 = 0;
         contadorJ2 = 0;
         bandera = 1;
-        if (PORTBbits.RB0 == 0) { //Botón de semáfoto
+        if (PORTBbits.RB0 == 0) { //Se presiona botón de semáfoto
             semaforo();
 
             while (bandera == 1) {
-                //PORTC=0b00011111;
-                if (PORTAbits.RA0 == 0) {
+                if (PORTAbits.RA0 == 0) { //Se presiona botón J1
                     __delay_ms(50); //Antirebote
                     if (PORTAbits.RA0 == 1) {//antirebote
                         contadorJ1++;
                         ledsJ1(contadorJ1);
-                        if (contadorJ1 == 8) {
-                            __delay_ms(200);
+                        
+                        if (contadorJ1 == 8) { //verificación si ya ganó
                             bandera = 2;
                         }
                     }
-                } else if (PORTAbits.RA1 == 0) {
+                } else if (PORTAbits.RA1 == 0) { //Se presiona botón J2
                     __delay_ms(50); //antirebote
                     if (PORTAbits.RA1 == 1) {
                         contadorJ2++;
                         ledsJ2(contadorJ2);
 
-                        if (contadorJ2 == 8) {
-                            __delay_ms(200);
+                        if (contadorJ2 == 8) { //verificación si ya ganó
                             bandera = 2;
                         }
-                    }//antirebote
+                    }
 
                 }
 
@@ -91,20 +107,7 @@ void main(void) {
 
 }
 
-void setup(void) {
-    ANSEL = 0;
-    ANSELH = 0;
-    TRISE = 0; //Puerto de los LEDS  
-    TRISC = 0; //Puerto LEDS jugador 1
-    TRISD = 0; //Puerto LEDS jugador 2
-    TRISB = 0b00000001; //Puerto botones y determinación del ganador
-    TRISA = 0b00000011;
-    PORTE = 0;
-    PORTC = 0;
-    PORTD = 0;
-    PORTB = 0;
-    PORTA = 0;
-}
+
 
 //Rutina para que se haga el inicio de la carrera con semaforo
 
@@ -128,124 +131,82 @@ void semaforo(void) {
 // Rutina para desplegar los leds del J1
 
 void ledsJ1(unsigned char C1) {
-    if (C1 == 8) {
+    if (C1 == 8) { //se verifica si ya presionó el botón 8 veces y ganó
         PORTBbits.RB2 = 1;
         PORTC = 0b10000000;
         __delay_ms(500);
-
-    } else if (C1 == 1) {
-        PORTC = 0b00000001;
-    } else if (C1 == 2) {
-        PORTC = 0b00000010;
-    } else if (C1 == 3) {
-        PORTC = 0b00000100;
-    } else if (C1 == 4) {
-        PORTC = 0b00001000;
-    } else if (C1 == 5) {
-        PORTC = 0b00010000;
-    } else if (C1 == 6) {
-        PORTC = 0b00100000;
-    } else if (C1 == 7) {
-        PORTC = 0b01000000;
     }
-    //    switch (C1) {
-    //        case 1:
-    //            PORTC = 0b01100001;
-    //            //__delay_ms(500);
-    //        case 2:
-    //            PORTC = 0b00000000;
-    //            PORTC = 0b00000010;
-    //            //__delay_ms(500);
-    //        case 3:
-    //            PORTC = 0b00000000;
-    //            PORTC = 0b00000100;
-    //            //__delay_ms(500);
-    //        case 4:
-    //            PORTCbits.RC2 = 0;
-    //            PORTCbits.RC3 = 1;
-    //            //__delay_ms(500);
-    //        case 5:
-    //            PORTCbits.RC3 = 0;
-    //            PORTCbits.RC4 = 1;
-    //            //__delay_ms(500);
-    //        case 6:
-    //            PORTCbits.RC4 = 0;
-    //            PORTCbits.RC5 = 1;
-    //            //__delay_ms(500);
-    //        case 7:
-    //            PORTCbits.RC5 = 0;
-    //            PORTCbits.RC6 = 1;
-    //            //__delay_ms(500);
-    //        case 8:
-    //            PORTCbits.RC6 = 0;
-    //            PORTCbits.RC7 = 1;
-    //            //__delay_ms(500);
-    //    }
+/*Case que indica el led que se enciende dependiendo de la cantidad de veces
+ que ha presionado el botón */
+        switch (C1) {
+            case 1:
+                PORTCbits.RC0 = 1;
+                break;
+            case 2:
+                PORTCbits.RC0 = 0;
+                PORTCbits.RC1 = 1;
+                break;
+            case 3:
+                PORTCbits.RC1 = 0;
+                PORTCbits.RC2 = 1;
+                break;
+            case 4:
+                PORTCbits.RC2 = 0;
+                PORTCbits.RC3 = 1;
+                break;
+            case 5:
+                PORTCbits.RC3 = 0;
+                PORTCbits.RC4 = 1;
+                break;
+            case 6:
+                PORTCbits.RC4 = 0;
+                PORTCbits.RC5 = 1;
+                break;
+            case 7:
+                PORTCbits.RC5 = 0;
+                PORTCbits.RC6 = 1;
+                break;
+            
+        }
 }
 
 // Rutina para desplegar los leds del J2
-
 void ledsJ2(unsigned char C2) {
-    if (C2 == 8) {
+    if (C2 == 8) { //se verifica si ya presionó 8 veces el botón y ganó
         PORTBbits.RB3 = 1;
         PORTD = 0b10000000;
         __delay_ms(500);
     }
-    //    } else if (C2 == 1) {
-    //        PORTD = 0b00000001;
-    //    } else if (C2 == 2) {
-    //        PORTD = 0b00000010;
-    //    } else if (C2 == 3) {
-    //        PORTD = 0b00000100;
-    //    } else if (C2 == 4) {
-    //        PORTD = 0b00001000;
-    //    } else if (C2 == 5) {
-    //        PORTD = 0b00010000;
-    //    } else if (C2 == 6) {
-    //        PORTD = 0b00100000;
-    //    } else if (C2 == 7) {
-    //        PORTD = 0b01000000;
-    //    }
+/*Case que indica el led que se enciende dependiendo de la cantidad de veces
+ que ha presionado el botón */
     switch (C2) {
         case 1:
             PORTDbits.RD0 = 1;
-            //__delay_ms(500);
             break;
         case 2:
             PORTDbits.RD0 = 0;
             PORTDbits.RD1 = 1;
-            //__delay_ms(500);
             break;
         case 3:
             PORTDbits.RD1 = 0;
             PORTDbits.RD2 = 1;
-            //__delay_ms(500);
             break;
         case 4:
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
-            //__delay_ms(500);
             break;
         case 5:
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 1;
-            //__delay_ms(500);
             break;
         case 6:
             PORTDbits.RD4 = 0;
             PORTDbits.RD5 = 1;
-            //__delay_ms(500);
             break;
         case 7:
             PORTDbits.RD5 = 0;
             PORTDbits.RD6 = 1;
-            //__delay_ms(500);
             break;
     }
-    //            case 8:
-    //                PORTDbits.RD6 = 0;
-    //                PORTDbits.RD7 = 1;
-    //                //__delay_ms(500);
-    //        }
 }
 

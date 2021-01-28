@@ -2524,15 +2524,33 @@ void ledsJ2(unsigned char C2);
 
 unsigned char C1;
 unsigned char C2;
-
 unsigned char contadorJ1 = 0;
 unsigned char contadorJ2 = 0;
 unsigned int bandera = 1;
 
+
+
+
+void setup(void) {
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISE = 0;
+    TRISC = 0;
+    TRISD = 0;
+    TRISB = 0b00000001;
+    TRISA = 0b00000011;
+
+    PORTE = 0;
+    PORTC = 0;
+    PORTD = 0;
+    PORTB = 0;
+    PORTA = 0;
+}
 void main(void) {
 
     while (1) {
         setup();
+
         contadorJ1 = 0;
         contadorJ2 = 0;
         bandera = 1;
@@ -2540,12 +2558,12 @@ void main(void) {
             semaforo();
 
             while (bandera == 1) {
-
                 if (PORTAbits.RA0 == 0) {
                     _delay((unsigned long)((50)*(8000000/4000.0)));
                     if (PORTAbits.RA0 == 1) {
                         contadorJ1++;
                         ledsJ1(contadorJ1);
+
                         if (contadorJ1 == 8) {
                             _delay((unsigned long)((200)*(8000000/4000.0)));
                             bandera = 2;
@@ -2573,20 +2591,7 @@ void main(void) {
 
 }
 
-void setup(void) {
-    ANSEL = 0;
-    ANSELH = 0;
-    TRISE = 0;
-    TRISC = 0;
-    TRISD = 0;
-    TRISB = 0b00000001;
-    TRISA = 0b00000011;
-    PORTE = 0;
-    PORTC = 0;
-    PORTD = 0;
-    PORTB = 0;
-    PORTA = 0;
-}
+
 
 
 
@@ -2614,25 +2619,40 @@ void ledsJ1(unsigned char C1) {
         PORTBbits.RB2 = 1;
         PORTC = 0b10000000;
         _delay((unsigned long)((500)*(8000000/4000.0)));
-
-    } else if (C1 == 1) {
-        PORTC = 0b00000001;
-    } else if (C1 == 2) {
-        PORTC = 0b00000010;
-    } else if (C1 == 3) {
-        PORTC = 0b00000100;
-    } else if (C1 == 4) {
-        PORTC = 0b00001000;
-    } else if (C1 == 5) {
-        PORTC = 0b00010000;
-    } else if (C1 == 6) {
-        PORTC = 0b00100000;
-    } else if (C1 == 7) {
-        PORTC = 0b01000000;
     }
-# 184 "main.c"
-}
 
+
+        switch (C1) {
+            case 1:
+                PORTCbits.RC0 = 1;
+                break;
+            case 2:
+                PORTCbits.RC0 = 0;
+                PORTCbits.RC1 = 1;
+                break;
+            case 3:
+                PORTCbits.RC1 = 0;
+                PORTCbits.RC2 = 1;
+                break;
+            case 4:
+                PORTCbits.RC2 = 0;
+                PORTCbits.RC3 = 1;
+                break;
+            case 5:
+                PORTCbits.RC3 = 0;
+                PORTCbits.RC4 = 1;
+                break;
+            case 6:
+                PORTCbits.RC4 = 0;
+                PORTCbits.RC5 = 1;
+                break;
+            case 7:
+                PORTCbits.RC5 = 0;
+                PORTCbits.RC6 = 1;
+                break;
+
+        }
+}
 
 
 void ledsJ2(unsigned char C2) {
@@ -2641,46 +2661,35 @@ void ledsJ2(unsigned char C2) {
         PORTD = 0b10000000;
         _delay((unsigned long)((500)*(8000000/4000.0)));
     }
-# 209 "main.c"
+
+
     switch (C2) {
         case 1:
             PORTDbits.RD0 = 1;
-
             break;
         case 2:
             PORTDbits.RD0 = 0;
             PORTDbits.RD1 = 1;
-
             break;
         case 3:
             PORTDbits.RD1 = 0;
             PORTDbits.RD2 = 1;
-
             break;
         case 4:
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
-
             break;
         case 5:
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 1;
-
             break;
         case 6:
             PORTDbits.RD4 = 0;
             PORTDbits.RD5 = 1;
-
             break;
         case 7:
             PORTDbits.RD5 = 0;
             PORTDbits.RD6 = 1;
-
             break;
     }
-
-
-
-
-
 }

@@ -11,17 +11,17 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\User\AppData\Local\Temp\s1q4.o
+$C:\Users\User\AppData\Local\Temp\s1ko.o
 end_init CODE 0 0 0 3 2
 config CONFIG 4 2007 2007 2 2
 $dist/default/production\Lab1.X.production.o
 cinit CODE 0 7EE 7EE 12 2
-text1 CODE 0 664 664 15 2
-text2 CODE 0 679 679 37 2
-text3 CODE 0 6B0 6B0 5C 2
-text4 CODE 0 70C 70C 67 2
+text1 CODE 0 66F 66F 15 2
+text2 CODE 0 684 684 37 2
+text3 CODE 0 717 717 5C 2
+text4 CODE 0 6BB 6BB 5C 2
 nvCOMMON COMMON 1 77 77 2 1
-idataCOMMON CODE 0 662 662 2 2
+idataCOMMON CODE 0 66D 66D 2 2
 maintext CODE 0 773 773 7B 2
 cstackCOMMON COMMON 1 70 70 7 1
 dataCOMMON COMMON 1 7B 7B 2 1
@@ -41,13 +41,13 @@ BANK0 20-6F 1
 BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
-CONST 3-661 2
+CONST 3-66C 2
 CONST 800-1FFF 2
-ENTRY 3-661 2
+ENTRY 3-66C 2
 ENTRY 800-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
-CODE 3-661 2
+CODE 3-66C 2
 CODE 800-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
@@ -55,9 +55,9 @@ SFR2 100-10F 1
 SFR3 180-18F 1
 COMMON 7D-7D 1
 EEDATA 2100-21FF 2
-STRCODE 3-661 2
+STRCODE 3-66C 2
 STRCODE 800-1FFF 2
-STRING 3-661 2
+STRING 3-66C 2
 STRING 800-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
@@ -73,125 +73,138 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Lab1.X.production.o
-7EE cinit CODE >481:C:\Users\User\AppData\Local\Temp\s1q4.s
-7EE cinit CODE >484:C:\Users\User\AppData\Local\Temp\s1q4.s
-7EE cinit CODE >507:C:\Users\User\AppData\Local\Temp\s1q4.s
-7F3 cinit CODE >508:C:\Users\User\AppData\Local\Temp\s1q4.s
-7F4 cinit CODE >509:C:\Users\User\AppData\Local\Temp\s1q4.s
-7F9 cinit CODE >510:C:\Users\User\AppData\Local\Temp\s1q4.s
-7FA cinit CODE >514:C:\Users\User\AppData\Local\Temp\s1q4.s
-7FB cinit CODE >515:C:\Users\User\AppData\Local\Temp\s1q4.s
-7FC cinit CODE >521:C:\Users\User\AppData\Local\Temp\s1q4.s
-7FC cinit CODE >523:C:\Users\User\AppData\Local\Temp\s1q4.s
-7FD cinit CODE >524:C:\Users\User\AppData\Local\Temp\s1q4.s
-70C text4 CODE >130:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-70D text4 CODE >131:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-713 text4 CODE >132:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-716 text4 CODE >133:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-718 text4 CODE >134:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-725 text4 CODE >136:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-72B text4 CODE >137:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-72F text4 CODE >138:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-736 text4 CODE >139:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-73A text4 CODE >140:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-741 text4 CODE >141:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-745 text4 CODE >142:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-74C text4 CODE >143:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-750 text4 CODE >144:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-757 text4 CODE >145:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-75B text4 CODE >146:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-762 text4 CODE >147:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-766 text4 CODE >148:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-76D text4 CODE >149:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-772 text4 CODE >150:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-772 text4 CODE >184:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6B0 text3 CODE >188:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6B1 text3 CODE >189:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6B7 text3 CODE >190:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6BA text3 CODE >191:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6BC text3 CODE >192:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6CA text3 CODE >210:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6CA text3 CODE >211:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6CD text3 CODE >213:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6CE text3 CODE >214:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6CE text3 CODE >215:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D1 text3 CODE >216:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D2 text3 CODE >218:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D3 text3 CODE >219:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D3 text3 CODE >220:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D6 text3 CODE >221:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D7 text3 CODE >223:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D8 text3 CODE >224:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6D8 text3 CODE >225:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6DB text3 CODE >226:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6DC text3 CODE >228:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6DD text3 CODE >229:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6DD text3 CODE >230:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E0 text3 CODE >231:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E1 text3 CODE >233:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E2 text3 CODE >234:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E2 text3 CODE >235:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E5 text3 CODE >236:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E6 text3 CODE >238:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E7 text3 CODE >239:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6E7 text3 CODE >240:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6EA text3 CODE >241:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6EB text3 CODE >243:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6EC text3 CODE >244:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-70B text3 CODE >250:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-679 text2 CODE >111:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-679 text2 CODE >112:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-67C text2 CODE >113:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-67D text2 CODE >114:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-67E text2 CODE >115:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-68B text2 CODE >117:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-68E text2 CODE >118:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-68F text2 CODE >119:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-690 text2 CODE >120:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-69D text2 CODE >122:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6A0 text2 CODE >123:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6A1 text2 CODE >124:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6A2 text2 CODE >125:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-6AF text2 CODE >126:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-664 text1 CODE >94:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-664 text1 CODE >95:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-667 text1 CODE >96:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-668 text1 CODE >97:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-66B text1 CODE >98:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-66C text1 CODE >99:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-66D text1 CODE >100:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-66F text1 CODE >101:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-671 text1 CODE >102:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-674 text1 CODE >103:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-675 text1 CODE >104:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-676 text1 CODE >105:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-677 text1 CODE >106:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-678 text1 CODE >107:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-773 maintext CODE >50:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-773 maintext CODE >52:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-773 maintext CODE >53:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-778 maintext CODE >54:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-779 maintext CODE >55:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-77A maintext CODE >56:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-77E maintext CODE >57:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-784 maintext CODE >58:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-789 maintext CODE >60:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-78A maintext CODE >62:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-790 maintext CODE >63:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-799 maintext CODE >64:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-79F maintext CODE >65:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7A3 maintext CODE >66:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7A9 maintext CODE >67:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7AF maintext CODE >68:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7BB maintext CODE >69:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7C0 maintext CODE >72:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7C4 maintext CODE >73:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7CD maintext CODE >74:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7D3 maintext CODE >75:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7D7 maintext CODE >76:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7DD maintext CODE >78:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7E4 maintext CODE >60:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
-7E4 maintext CODE >84:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7EE cinit CODE >483:C:\Users\User\AppData\Local\Temp\s1ko.s
+7EE cinit CODE >486:C:\Users\User\AppData\Local\Temp\s1ko.s
+7EE cinit CODE >509:C:\Users\User\AppData\Local\Temp\s1ko.s
+7F3 cinit CODE >510:C:\Users\User\AppData\Local\Temp\s1ko.s
+7F4 cinit CODE >511:C:\Users\User\AppData\Local\Temp\s1ko.s
+7F9 cinit CODE >512:C:\Users\User\AppData\Local\Temp\s1ko.s
+7FA cinit CODE >516:C:\Users\User\AppData\Local\Temp\s1ko.s
+7FB cinit CODE >517:C:\Users\User\AppData\Local\Temp\s1ko.s
+7FC cinit CODE >523:C:\Users\User\AppData\Local\Temp\s1ko.s
+7FC cinit CODE >525:C:\Users\User\AppData\Local\Temp\s1ko.s
+7FD cinit CODE >526:C:\Users\User\AppData\Local\Temp\s1ko.s
+6BB text4 CODE >135:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6BC text4 CODE >136:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6C2 text4 CODE >137:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6C5 text4 CODE >138:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6C7 text4 CODE >139:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6D5 text4 CODE >144:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6D5 text4 CODE >145:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6D8 text4 CODE >146:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6D9 text4 CODE >147:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6D9 text4 CODE >148:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6DC text4 CODE >149:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6DD text4 CODE >150:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6DE text4 CODE >151:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6DE text4 CODE >152:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E1 text4 CODE >153:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E2 text4 CODE >154:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E3 text4 CODE >155:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E3 text4 CODE >156:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E6 text4 CODE >157:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E7 text4 CODE >158:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E8 text4 CODE >159:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6E8 text4 CODE >160:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6EB text4 CODE >161:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6EC text4 CODE >162:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6ED text4 CODE >163:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6ED text4 CODE >164:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F0 text4 CODE >165:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F1 text4 CODE >166:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F2 text4 CODE >167:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F2 text4 CODE >168:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F5 text4 CODE >169:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F6 text4 CODE >170:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6F7 text4 CODE >172:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+716 text4 CODE >173:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+717 text3 CODE >176:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+718 text3 CODE >177:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+71E text3 CODE >178:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+721 text3 CODE >179:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+723 text3 CODE >180:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+731 text3 CODE >185:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+731 text3 CODE >186:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+734 text3 CODE >187:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+735 text3 CODE >188:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+735 text3 CODE >189:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+738 text3 CODE >190:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+739 text3 CODE >191:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73A text3 CODE >192:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73A text3 CODE >193:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73D text3 CODE >194:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73E text3 CODE >195:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73F text3 CODE >196:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+73F text3 CODE >197:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+742 text3 CODE >198:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+743 text3 CODE >199:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+744 text3 CODE >200:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+744 text3 CODE >201:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+747 text3 CODE >202:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+748 text3 CODE >203:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+749 text3 CODE >204:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+749 text3 CODE >205:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+74C text3 CODE >206:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+74D text3 CODE >207:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+74E text3 CODE >208:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+74E text3 CODE >209:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+751 text3 CODE >210:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+752 text3 CODE >211:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+753 text3 CODE >212:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+772 text3 CODE >213:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+684 text2 CODE >116:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+684 text2 CODE >117:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+687 text2 CODE >118:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+688 text2 CODE >119:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+689 text2 CODE >120:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+696 text2 CODE >122:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+699 text2 CODE >123:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+69A text2 CODE >124:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+69B text2 CODE >125:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6A8 text2 CODE >127:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6AB text2 CODE >128:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6AC text2 CODE >129:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6AD text2 CODE >130:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+6BA text2 CODE >131:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+66F text1 CODE >52:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+66F text1 CODE >53:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+672 text1 CODE >54:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+673 text1 CODE >55:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+676 text1 CODE >56:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+677 text1 CODE >57:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+678 text1 CODE >58:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+67A text1 CODE >59:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+67C text1 CODE >61:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+67F text1 CODE >62:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+680 text1 CODE >63:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+681 text1 CODE >64:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+682 text1 CODE >65:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+683 text1 CODE >66:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+773 maintext CODE >67:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+773 maintext CODE >69:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+773 maintext CODE >70:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+778 maintext CODE >72:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+779 maintext CODE >73:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+77A maintext CODE >74:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+77E maintext CODE >75:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+784 maintext CODE >76:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+789 maintext CODE >78:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+78A maintext CODE >79:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+790 maintext CODE >80:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+799 maintext CODE >81:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+79F maintext CODE >82:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7A3 maintext CODE >83:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7A9 maintext CODE >85:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7AF maintext CODE >86:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7BB maintext CODE >87:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7C0 maintext CODE >90:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7C4 maintext CODE >91:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7CD maintext CODE >92:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7D3 maintext CODE >93:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7D7 maintext CODE >94:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7DD maintext CODE >96:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7E4 maintext CODE >78:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
+7E4 maintext CODE >102:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Lab1.X\main.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -212,38 +225,38 @@ __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s1q4.o
+___sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s1ko.o
 _main EE6 0 CODE 0 maintext dist/default/production\Lab1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Lab1.X.production.o
-start 0 0 CODE 0 init C:\Users\User\AppData\Local\Temp\s1q4.o
+start 0 0 CODE 0 init C:\Users\User\AppData\Local\Temp\s1ko.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __LnvCOMMON 0 0 ABS 0 nvCOMMON -
 __HdataCOMMON 0 0 ABS 0 dataCOMMON -
-intlevel0 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1q4.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s1ko.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
-__pidataCOMMON CC4 0 CODE 0 idataCOMMON dist/default/production\Lab1.X.production.o
+__pidataCOMMON CDA 0 CODE 0 idataCOMMON dist/default/production\Lab1.X.production.o
 _ANSELH 189 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __LdataCOMMON 0 0 ABS 0 dataCOMMON -
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s1q4.o
-___stacklo 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s1q4.o
+___stackhi 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s1ko.o
+___stacklo 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s1ko.o
 __LidataCOMMON 0 0 ABS 0 idataCOMMON -
 __size_of_setup 0 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __HnvCOMMON 0 0 ABS 0 nvCOMMON -
 start_initialization FDC 0 CODE 0 cinit dist/default/production\Lab1.X.production.o
-__end_of_ledsJ1 EE6 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
-__end_of_ledsJ2 E18 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s1q4.o
+__end_of_ledsJ1 E2E 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
+__end_of_ledsJ2 EE6 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
+___int_sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s1ko.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -263,6 +276,7 @@ __Lcinit FDC 0 CODE 0 cinit -
 __Lstack 0 0 STACK 2 stack -
 _PORTAbits 5 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _PORTBbits 6 0 ABS 0 - dist/default/production\Lab1.X.production.o
+_PORTCbits 7 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _PORTDbits 8 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _PORTEbits 9 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __Habs1 0 0 ABS 0 abs1 -
@@ -290,14 +304,14 @@ __pnvCOMMON 77 0 COMMON 1 nvCOMMON dist/default/production\Lab1.X.production.o
 __HidataCOMMON 0 0 ABS 0 idataCOMMON -
 _bandera 7B 0 COMMON 1 dataCOMMON dist/default/production\Lab1.X.production.o
 __Lintentry 0 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\User\AppData\Local\Temp\s1q4.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\User\AppData\Local\Temp\s1ko.o
 __size_of_semaforo 0 0 ABS 0 - dist/default/production\Lab1.X.production.o
-_ledsJ1 E18 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
-_ledsJ2 D60 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
+_ledsJ1 D76 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
+_ledsJ2 E2E 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
 __pmaintext EE6 0 CODE 0 maintext dist/default/production\Lab1.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
-_semaforo CF2 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
+_semaforo D08 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
 __size_of_ledsJ1 0 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __size_of_ledsJ2 0 0 ABS 0 - dist/default/production\Lab1.X.production.o
 __Lspace_0 0 0 ABS 0 - -
@@ -308,15 +322,15 @@ __Lspace_4 0 0 ABS 0 - -
 __pbssCOMMON 79 0 COMMON 1 bssCOMMON dist/default/production\Lab1.X.production.o
 __Lend_init 0 0 CODE 0 end_init -
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-__end_of_semaforo D60 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
+__end_of_semaforo D76 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
 end_of_initialization FF8 0 CODE 0 cinit dist/default/production\Lab1.X.production.o
 __Hintentry 0 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 0 0 CODE 0 reset_vec -
-__ptext1 CC8 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
-__ptext2 CF2 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
-__ptext3 D60 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
-__ptext4 E18 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
+__ptext1 CDE 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
+__ptext2 D08 0 CODE 0 text2 dist/default/production\Lab1.X.production.o
+__ptext3 E2E 0 CODE 0 text3 dist/default/production\Lab1.X.production.o
+__ptext4 D76 0 CODE 0 text4 dist/default/production\Lab1.X.production.o
 _contadorJ1 78 0 COMMON 1 nvCOMMON dist/default/production\Lab1.X.production.o
 _contadorJ2 77 0 COMMON 1 nvCOMMON dist/default/production\Lab1.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
@@ -339,10 +353,10 @@ _TRISB 86 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _TRISC 87 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _TRISD 88 0 ABS 0 - dist/default/production\Lab1.X.production.o
 _TRISE 89 0 ABS 0 - dist/default/production\Lab1.X.production.o
-__end_of_setup CF2 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
+__end_of_setup D08 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-_setup CC8 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
+_setup CDE 0 CODE 0 text1 dist/default/production\Lab1.X.production.o
 __initialization FDC 0 CODE 0 cinit dist/default/production\Lab1.X.production.o
 __pdataCOMMON 7B 0 COMMON 1 dataCOMMON dist/default/production\Lab1.X.production.o
 # %SPLITSTAB Section
@@ -371,11 +385,11 @@ __pdataCOMMON 7B 0 COMMON 1 dataCOMMON dist/default/production\Lab1.X.production
 # All other numeric quantities are in decimal.
 %SEGMENTS
 cinit 0 7EE FDC 12 2
-text1 0 664 CC8 15 2
-text2 0 679 CF2 37 2
-text3 0 6B0 D60 5C 2
-text4 0 70C E18 67 2
-idataCOMMON 0 662 CC4 2 2
+text1 0 66F CDE 15 2
+text2 0 684 D08 37 2
+text3 0 717 E2E 5C 2
+text4 0 6BB D76 5C 2
+idataCOMMON 0 66D CDA 2 2
 maintext 0 773 EE6 7B 2
 cstackCOMMON 1 70 70 D 1
 reset_vec 0 0 0 3 2

@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.31\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Lab1.X.production.sym \
   --cmf=dist/default/production\Lab1.X.production.cmf -z -Q16F887 \
-  -oC:\Users\User\AppData\Local\Temp\s1q4.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\User\AppData\Local\Temp\s1ko.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Lab1.X.production.map -E1 -ver=XC8 Compiler \
   --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
-  -pfunctab=ENTRY -k C:\Users\User\AppData\Local\Temp\s1q4.o \
+  -pfunctab=ENTRY -k C:\Users\User\AppData\Local\Temp\s1ko.o \
   dist/default/production\Lab1.X.production.o 
 
 Object code version is 3.11
@@ -28,22 +28,22 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\User\AppData\Local\Temp\s1q4.o
+C:\Users\User\AppData\Local\Temp\s1ko.o
                 end_init                              0        0        3        0       0
                 config                             2007     2007        2        0       4
 dist/default/production\Lab1.X.production.o
                 cinit                               7EE      7EE       12      FDC       0
                 config                             2007     2007        2        0       4
-                text4                               70C      70C       67      E18       0
-                text3                               6B0      6B0       5C      D60       0
-                text2                               679      679       37      CF2       0
-                text1                               664      664       15      CC8       0
+                text4                               6BB      6BB       5C      D76       0
+                text3                               717      717       5C      E2E       0
+                text2                               684      684       37      D08       0
+                text1                               66F      66F       15      CDE       0
                 maintext                            773      773       7B      EE6       0
                 cstackCOMMON                         70       70        7       70       1
                 dataCOMMON                           7B       7B        2       70       1
                 bssCOMMON                            79       79        2       70       1
                 nvCOMMON                             77       77        2       70       1
-                idataCOMMON                         662      662        2      CC4       0
+                idataCOMMON                         66D      66D        2      CDA       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -51,12 +51,12 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                              0        0        3         0
                 cinit                               7EE      7EE       12         0
-                text4                               70C      70C       67         0
-                text3                               6B0      6B0       5C         0
-                text2                               679      679       37         0
-                text1                               664      664       15         0
+                text4                               6BB      6BB       5C         0
+                text3                               717      717       5C         0
+                text2                               684      684       37         0
+                text1                               66F      66F       15         0
                 maintext                            773      773       7B         0
-                idataCOMMON                         662      662        2         0
+                idataCOMMON                         66D      66D        2         0
 
         CLASS   STRCODE        
 
@@ -106,11 +106,11 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000003  000003         0       0  CODE        2
                 cstackCOMMON                   000070  00000D  00007D        70       1  COMMON      1
-                idataCOMMON                    000662  000002  000664       CC4       0  CODE        2
-                text1                          000664  000015  000679       CC8       0  CODE        2
-                text2                          000679  000037  0006B0       CF2       0  CODE        2
-                text3                          0006B0  00005C  00070C       D60       0  CODE        2
-                text4                          00070C  000067  000773       E18       0  CODE        2
+                idataCOMMON                    00066D  000002  00066F       CDA       0  CODE        2
+                text1                          00066F  000015  000684       CDE       0  CODE        2
+                text2                          000684  000037  0006BB       D08       0  CODE        2
+                text4                          0006BB  00005C  000717       D76       0  CODE        2
+                text3                          000717  00005C  000773       E2E       0  CODE        2
                 maintext                       000773  00007B  0007EE       EE6       0  CODE        2
                 cinit                          0007EE  000012  000800       FDC       0  CODE        2
 
@@ -122,13 +122,13 @@ UNUSED ADDRESS RANGES
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01EF             60           1
-        CODE             0003-0661            65F           2
+        CODE             0003-066C            66A           2
                          0800-1FFF            800
         COMMON           007D-007D              1           1
-        CONST            0003-0661            100           2
+        CONST            0003-066C            100           2
                          0800-1FFF            100
         EEDATA           2100-21FF            100           2
-        ENTRY            0003-0661            100           2
+        ENTRY            0003-066C            100           2
                          0800-1FFF            100
         IDLOC            2000-2003              4           2
         RAM              0020-006F             50           1
@@ -140,9 +140,9 @@ UNUSED ADDRESS RANGES
         SFR2             0100-010F             10           1
         SFR3             0180-018F             10           1
         STACK            0110-016F             60           1
-        STRCODE          0003-0661            65F           2
+        STRCODE          0003-066C            66A           2
                          0800-1FFF           1800
-        STRING           0003-0661            100           2
+        STRING           0003-066C            100           2
                          0800-1FFF            100
 
                                   Symbol Table
@@ -154,6 +154,7 @@ _PORTAbits               (abs)        0005
 _PORTB                   (abs)        0006
 _PORTBbits               (abs)        0006
 _PORTC                   (abs)        0007
+_PORTCbits               (abs)        0007
 _PORTD                   (abs)        0008
 _PORTDbits               (abs)        0008
 _PORTE                   (abs)        0009
@@ -245,22 +246,22 @@ ___sp                    stack        0000
 ___stackhi               (abs)        0000
 ___stacklo               (abs)        0000
 __end_of__initialization cinit        07FC
-__end_of_ledsJ1          text4        0773
-__end_of_ledsJ2          text3        070C
+__end_of_ledsJ1          text4        0717
+__end_of_ledsJ2          text3        0773
 __end_of_main            maintext     07EE
-__end_of_semaforo        text2        06B0
-__end_of_setup           text1        0679
+__end_of_semaforo        text2        06BB
+__end_of_setup           text1        0684
 __initialization         cinit        07EE
 __pbssCOMMON             bssCOMMON    0079
 __pcstackCOMMON          cstackCOMMON 0070
 __pdataCOMMON            dataCOMMON   007B
-__pidataCOMMON           idataCOMMON  0662
+__pidataCOMMON           idataCOMMON  066D
 __pmaintext              maintext     0773
 __pnvCOMMON              nvCOMMON     0077
-__ptext1                 text1        0664
-__ptext2                 text2        0679
-__ptext3                 text3        06B0
-__ptext4                 text4        070C
+__ptext1                 text1        066F
+__ptext2                 text2        0684
+__ptext3                 text3        0717
+__ptext4                 text4        06BB
 __size_of_ledsJ1         (abs)        0000
 __size_of_ledsJ2         (abs)        0000
 __size_of_main           (abs)        0000
@@ -269,11 +270,11 @@ __size_of_setup          (abs)        0000
 _bandera                 dataCOMMON   007B
 _contadorJ1              nvCOMMON     0078
 _contadorJ2              nvCOMMON     0077
-_ledsJ1                  text4        070C
-_ledsJ2                  text3        06B0
+_ledsJ1                  text4        06BB
+_ledsJ2                  text3        0717
 _main                    maintext     0773
-_semaforo                text2        0679
-_setup                   text1        0664
+_semaforo                text2        0684
+_setup                   text1        066F
 btemp                    (abs)        007E
 end_of_initialization    cinit        07FC
 intlevel0                functab      0000
@@ -294,7 +295,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 50 in file "main.c"
+		line 67 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -326,7 +327,7 @@ Total ram usage:        3 bytes
 
  *************** function _setup *****************
  Defined at:
-		line 94 in file "main.c"
+		line 52 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -355,7 +356,7 @@ Total ram usage:        0 bytes
 
  *************** function _semaforo *****************
  Defined at:
-		line 111 in file "main.c"
+		line 116 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -384,7 +385,7 @@ Total ram usage:        3 bytes
 
  *************** function _ledsJ2 *****************
  Defined at:
-		line 188 in file "main.c"
+		line 176 in file "main.c"
  Parameters:    Size  Location     Type
   C2              1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -413,7 +414,7 @@ Total ram usage:        4 bytes
 
  *************** function _ledsJ1 *****************
  Defined at:
-		line 130 in file "main.c"
+		line 135 in file "main.c"
  Parameters:    Size  Location     Type
   C1              1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -421,7 +422,7 @@ Total ram usage:        4 bytes
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, status,2, status,0
+		wreg, fsr0l, fsr0h, status,2, status,0
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -450,11 +451,11 @@ shared
 shared estimated size: 14
 
 main.c
-		_ledsJ1        		CODE           	070C	0000	103
+		_ledsJ1        		CODE           	06BB	0000	92
 		_main          		CODE           	0773	0000	123
-		_ledsJ2        		CODE           	06B0	0000	92
-		_semaforo      		CODE           	0679	0000	55
-		_setup         		CODE           	0664	0000	21
+		_ledsJ2        		CODE           	0717	0000	92
+		_semaforo      		CODE           	0684	0000	55
+		_setup         		CODE           	066F	0000	21
 
-main.c estimated size: 394
+main.c estimated size: 383
 
