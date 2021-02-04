@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "7segmentos.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,22 +6,9 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 10 "main.c"
-#pragma config FOSC = INTRC_CLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+# 1 "7segmentos.c" 2
 
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
 
 
 
@@ -2508,249 +2495,13 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 29 "main.c" 2
+# 9 "7segmentos.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
 
 
+void Segmentos (void) {
+    OPTION_REG = 0b10000111;
+    TMR0 = 10;
 
 
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 30 "main.c" 2
-
-# 1 "./ADC.h" 1
-# 11 "./ADC.h"
-void AADC(uint8_t banderaADC);
-# 31 "main.c" 2
-
-# 1 "./7segmentos.h" 1
-# 10 "./7segmentos.h"
-void Segmentos (void);
-# 32 "main.c" 2
-# 46 "main.c"
-uint8_t count;
-uint8_t tabla_segmentos[] = {0b00111111, 0b00000110, 0b01011011, 0b01001111, 0b01100110, 0b01101101, 0b01111101, 0b00000111, 0b01111111, 0b01101111, 0b01110111, 0b01111100, 0b00111001, 0b01011110, 0b01111001, 0b01110001};
-uint8_t banderaADC;
-uint8_t segmentoD;
-uint8_t segmentoI;
-uint8_t valorD;
-uint8_t valorI;
-uint8_t adc;
-
-
-
-
-void setup(void) {
-    ANSEL = 0x01;
-    ANSELH = 0;
-    TRISB = 0x03;
-    INTCON = 0xE8;
-
-
-    TRISD = 0;
-    TRISE = 0b00000000;;
-    TRISC = 0b00000000;;
-
-
-    PORTB = 0;
-    PORTD = 0;
-    PORTE = 0;
-
-    PORTA = 0;
-
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
-    PORTEbits.RE0 = 1;
-
-}
-
-
-
-
-
-void __attribute__((picinterrupt(("")))) ISR(void) {
-
-    if (INTCONbits.RBIF == 1) {
-        if (PORTBbits.RB0 == 0) {
-            count++;
-        } else if (PORTBbits.RB1 == 0) {
-            count--;
-        }
-        INTCONbits.RBIF = 0;
-    }
-
-    if (PIR1bits.ADIF == 1) {
-        banderaADC = 1;
-        valorI = ADRESH >> 4;
-        valorD = ADRESH & 0b00001111;
-        adc = ADRESH;
-        PIR1bits.ADIF = 0;
-
-    }
-
-    if (INTCONbits.T0IF == 1) {
-        TMR0 = 10;
-        if (PORTEbits.RE0 == 1) {
-            PORTEbits.RE0 = 0;
-            PORTEbits.RE1 = 1;
-            PORTC = segmentoD;
-        } else if (PORTEbits.RE1 == 1) {
-            PORTEbits.RE1 = 0;
-            PORTEbits.RE0 = 1;
-            PORTC = segmentoI;
-
-        }
-        INTCONbits.T0IF = 0;
-    }
-
-
-
-
-}
-
-void main(void) {
-    setup();
-    count = 0;
-    banderaADC = 1;
-    Segmentos();
-    while (1) {
-        AADC(banderaADC);
-        PORTD = count;
-        segmentoI = tabla_segmentos[valorI];
-        segmentoD = tabla_segmentos[valorD];
-        if (adc > count) {
-            PORTEbits.RE2 = 1;
-        } else {
-            PORTEbits.RE2 = 0;
-
-        }
-
-    }
 }
