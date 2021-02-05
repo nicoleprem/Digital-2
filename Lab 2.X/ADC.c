@@ -14,7 +14,7 @@ uint8_t banderaADC;
 
 void AADC (uint8_t banderaADC) {
     ADCON1bits.ADFM = 0;
-    INTCON = 0b11101000;
+    INTCON = 0b11101000; 
     ANSEL = 0b00000001;
     ADCON0 = 0b01000001;
     PIE1bits.ADIE = 1; //Habilitar ADC interrupt enable 
