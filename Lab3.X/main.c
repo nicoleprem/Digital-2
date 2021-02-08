@@ -27,40 +27,83 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 #include <xc.h>
+#include <stdint.h>
 #include "LCD.h"
+#define _XTAL_FREQ 8000000
+//char a;
+
+//*****************************************************************************
+//Declaración de entradas, salidas y limpieza de puertos
+//*****************************************************************************
+
+void setup(void) {
+    ANSEL = 0; //Entrada analógica
+    ANSELH = 0; //Entrada analógica
+    TRISC = 0b00000000;
+    TRISD = 0b00000000;
+    //limpieza de puertos
+    //PORTC = 0;
+    //PORTD = 0;
+    PORTA = 0;
+
+}
+//#define RS RD2
+//#define EN RD3
+//#define C0 RC0
+//#define C1 RC1
+//#define C2 RC2
+//#define C3 RC3
+//#define C4 RC4
+//#define C5 RC5
+//#define C6 RC6
+//#define C7 RC7
 
 void main(void) {
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("LCD Library for");
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("MPLAB XC8");
-    __delay_ms(2000);
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("Developed By");
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("electroSome");
-    __delay_ms(2000);
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("www.electroSome.com");
+    unsigned int a;
+    setup();
+    //TRISC = 0x00;
+    //TRISD = 0x00;
+    Lcd_Init();
+    while (1) {
 
-    for(a=0;a<15;a++)
-    {
-        __delay_ms(300);
-        Lcd_Shift_Left();
+        Lcd_Clear();
+        //        if (PORTCbits.RC7 == 0) {
+        Lcd_Set_Cursor(1, 1);
+        Lcd_Write_String("TE AMO");
+        //        }
+        //        if (PORTCbits.RC7 == 0) {
+        Lcd_Set_Cursor(2, 1);
+        Lcd_Write_String("GRACIAS BABY");
+        __delay_ms(2000);
+        Lcd_Clear();
+        //        }
+        //        if (PORTCbits.RC7 == 0) {
+        Lcd_Set_Cursor(1, 1);
+        Lcd_Write_String("Developed By");
+        Lcd_Set_Cursor(2, 1);
+        Lcd_Write_String("electroSome");
+        __delay_ms(2000);
+        Lcd_Clear();
+        //        }
+
+
+        //        Lcd_Set_Cursor(1, 1);
+        //        Lcd_Write_String("www.electroSome.com");
+
+        for (a = 0; a < 15; a++) {
+            __delay_ms(300);
+            Lcd_Shift_Left();
+        }
+
+        for (a = 0; a < 15; a++) {
+            __delay_ms(300);
+            Lcd_Shift_Right();
+        }
+
+        Lcd_Clear();
+        Lcd_Set_Cursor(2, 1);
+        Lcd_Write_Char('e');
+        Lcd_Write_Char('S');
+        __delay_ms(2000);
     }
-
-    for(a=0;a<15;a++)
-    {
-        __delay_ms(300);
-        Lcd_Shift_Right();
-    }
-
-    Lcd_Clear();
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_Char('e');
-    Lcd_Write_Char('S');
-    __delay_ms(2000)
 }
