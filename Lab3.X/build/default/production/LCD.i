@@ -2498,7 +2498,7 @@ extern __bank0 __bit __timeout;
 # 9 "LCD.c" 2
 
 # 1 "./LCD.h" 1
-# 21 "./LCD.h"
+# 12 "./LCD.h"
 void Lcd_Port(char a);
 void Lcd_Cmd(char a);
 void Lcd_Clear(void);
@@ -2509,7 +2509,7 @@ void Lcd_Write_String(char *a);
 void Lcd_Shift_Right(void);
 void Lcd_Shift_Left(void);
 # 10 "LCD.c" 2
-# 43 "LCD.c"
+# 23 "LCD.c"
 void Lcd_Port(char a)
 {
 
@@ -2569,7 +2569,7 @@ void Lcd_Init(void)
   Lcd_Cmd (0x38);
   Lcd_Cmd (0x0C);
   Lcd_Cmd (0x06);
-# 112 "LCD.c"
+# 92 "LCD.c"
 }
 
 void Lcd_Write_Char(char a)

@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "ADC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,22 +6,11 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 12 "main.c"
-#pragma config FOSC = INTRC_CLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
+# 1 "ADC.c" 2
 
 
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
+
+
 
 
 
@@ -2506,7 +2495,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 29 "main.c" 2
+# 9 "ADC.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2641,199 +2630,33 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 30 "main.c" 2
+# 10 "ADC.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 1 3
 
+uint8_t banderaADC;
 
 
-# 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__size_t.h" 1 3
+uint8_t AADC (uint8_t banderaADC, uint8_t Num_Pot) {
+    uint8_t pot;
+    ADCON1bits.ADFM = 0;
+    INTCON = 0b11101000;
 
 
 
-typedef unsigned size_t;
-# 4 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
-
-# 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__null.h" 1 3
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdarg.h" 1 3
-
-
-
-
-
-
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-# 11 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
-# 43 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
-struct __prbuf
-{
- char * ptr;
- void (* func)(char);
-};
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\errno.h" 1 3
-# 29 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\conio.h" 2 3
-
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-# 180 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-# 31 "main.c" 2
-
-# 1 "./LCD.h" 1
-# 12 "./LCD.h"
-void Lcd_Port(char a);
-void Lcd_Cmd(char a);
-void Lcd_Clear(void);
-void Lcd_Set_Cursor(char a, char b);
-void Lcd_Init(void);
-void Lcd_Write_Char(char a);
-void Lcd_Write_String(char *a);
-void Lcd_Shift_Right(void);
-void Lcd_Shift_Left(void);
-# 32 "main.c" 2
-
-# 1 "./ADC.h" 1
-# 10 "./ADC.h"
-uint8_t AADC(uint8_t banderaADC, uint8_t Num_Pot);
-# 33 "main.c" 2
-
-
-
-
-
-
-uint8_t S1 ;
-uint8_t S2;
-uint8_t banderaADC=1;
-uint8_t adc;
-uint8_t pot;
-uint8_t Num_Pot=1;
-
-double conversor;
-char s[20];
-
-
-
-
-
-
-
-void setup(void) {
-    ANSEL = 0b00000011;
-
-    TRISC = 0b00000000;
-    TRISD = 0b00000000;
-
-    PORTC = 0;
-    PORTD = 0;
-
-
-}
-
-
-
-
-
-void __attribute__((picinterrupt(("")))) ISR(void) {
-    if (PIR1bits.ADIF==1){
-        if (pot ==1){
-            S1=ADRESH;
-            Num_Pot=0;
-            banderaADC=1;
-        }else if(pot ==0){
-            S2=ADRESH;
-            Num_Pot=1;
-            banderaADC=1;
-        }
-        PIR1bits.ADIF=0;
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF = 0;
+    if (banderaADC == 1 && Num_Pot ==1){
+         ADCON0 = 0b01000001;
+        _delay((unsigned long)((20)*(8000000/4000000.0)));
+        ADCON0bits.GO = 1;
+        banderaADC = 0;
+        pot=1;
+    } else if (banderaADC==1 && Num_Pot ==0){
+        ADCON0 = 0b01000101;
+        _delay((unsigned long)((20)*(8000000/4000000.0)));
+        ADCON0bits.GO = 1;
+        banderaADC = 0;
+        pot=0;
     }
-
-}
-
-void main(void) {
-    unsigned int a;
-    setup();
-
-
-    Lcd_Init();
-    while (1) {
-       pot=AADC(banderaADC,Num_Pot);
-
-        Lcd_Clear();
-
-        Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String("S1:   S2:  S3:");
-        conversor= 0.0195*S1;
-        Lcd_Set_Cursor(2, 1);
-        sprintf (s,"%3.2fV" ,conversor);
-        Lcd_Write_String (s);
-        conversor=0.0195*S2;
-         Lcd_Set_Cursor(2, 7);
-        sprintf (s,"%3.2fV" ,conversor);
-        Lcd_Write_String (s);
-        _delay((unsigned long)((250)*(8000000/4000.0)));
-    }
+    return(pot);
 }

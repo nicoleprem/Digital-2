@@ -1,7 +1,7 @@
 /*
  * File:   LCD.c
- * Author: https://electrosome.com/lcd-pic-mplab-xc8/
- *
+ * Author: https://electrosome.com/lcd-pic-mplab-xc8/ Librería modificada para
+ *8 bits
  * Created on 4 de febrero de 2021, 06:20 PM
  */
 
@@ -19,27 +19,7 @@
     #define C5 PORTCbits.RC5
     #define C6 PORTCbits.RC6
     #define C7 PORTCbits.RC7
-//#define RS PORTDbits.RD2
-//#define EN RD3
-//#define C0 RC0
-//#define C1 RC1
-//#define C2 RC2
-//#define C3 RC3
-//#define C4 RC4
-//#define C5 RC5
-//#define C6 RC6
-//#define C7 RC7
-//void setup(void) {
-//    ANSEL = 0; //Entrada analógica
-//    ANSELH = 0; //Entrada analógica
-//    TRISC = 0;
-//    TRISD = 0;
-//    //limpieza de puertos
-//    PORTC = 0;
-//    PORTD = 0;
-//    PORTA = 0;
-//
-//}
+
 void Lcd_Port(char a)
 {
     
