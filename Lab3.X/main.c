@@ -41,8 +41,8 @@ uint8_t S1; //Variable para guardar valor del sensor 1
 uint8_t S2; //Variable para guardar valor del sensor 1
 uint8_t banderaADC = 1; //bandera del ADC
 uint8_t adc;
-uint8_t pot;
-uint8_t Num_Pot = 1;
+uint8_t pot; //bandera para determinar cuál valor de los pots se mostrará
+uint8_t Num_Pot = 1; //
 uint8_t mensaje;
 uint8_t contador = 0;
 
@@ -114,16 +114,16 @@ void main(void) {
         //Lcd_Clear();       
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String("S1:   S2:    S3:"); //Primera fila
-        conversor = 0.0195 * S1;
-        Lcd_Set_Cursor(2, 1);
+        conversor = 0.0195 * S1; //Conversión de binario a decimal (5*S1)/2^8
+        Lcd_Set_Cursor(2, 1); //Posición S1
         sprintf(s, "%3.2fV", conversor); //Valor S1
-        Lcd_Write_String(s);
+        Lcd_Write_String(s); //Imprimir S1
         conversor = 0.0195 * S2;
-        Lcd_Set_Cursor(2, 7);
+        Lcd_Set_Cursor(2, 7); //Pisición S2
         sprintf(s, "%3.2fV", conversor); //Valor S2
         Lcd_Write_String(s);
         //Comienzo de la impresión contador
-        Lcd_Set_Cursor(2, 14);
+        Lcd_Set_Cursor(2, 14); //Posición S3
         sprintf(s, "%d", contador); //Valor contador
         Lcd_Write_String(s);
         write(s); //mandar el valor y verificar que se mande el dato

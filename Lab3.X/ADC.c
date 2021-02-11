@@ -16,7 +16,7 @@ uint8_t AADC (uint8_t banderaADC, uint8_t Num_Pot) {
     uint8_t pot;
     ADCON1bits.ADFM = 0;
     INTCON = 0b11101000; 
-    //ANSEL = 0b00000011;
+    
    
     
     PIE1bits.ADIE = 1; //Habilitar ADC interrupt enable 
@@ -25,14 +25,14 @@ uint8_t AADC (uint8_t banderaADC, uint8_t Num_Pot) {
          ADCON0 = 0b01000001; //Activar canal AN0
         __delay_us(20); //Delay para volver a hacer la conversion
         ADCON0bits.GO = 1; //Se empieza a hacer la conversión
-        banderaADC = 0;
-        pot=1;
+        banderaADC = 0; //apagar bandera
+        pot=1; //turno del S1
     } else if (banderaADC==1 && Num_Pot ==0){
         ADCON0 = 0b01000101; //Activar canal AN1
         __delay_us(20); //Delay para volver a hacer la conversion
         ADCON0bits.GO = 1; //Se empieza a hacer la conversión
         banderaADC = 0;
-        pot=0;
+        pot=0; //turno del S2
     }
     return(pot);
 }

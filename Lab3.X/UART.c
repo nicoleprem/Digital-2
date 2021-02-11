@@ -21,17 +21,17 @@ void INIT_UART (void) {
 }
 
 
-void write (char *entrada){
-    TXREG = entrada[0]; 
+void write (char *entrada){ //función para el contador de 4 bits de ancho
+    TXREG = entrada[0]; //bit 1
     while (TRMT == 0) {
     }
-    TXREG = entrada[1];
+    TXREG = entrada[1]; //bit 2
     while (TRMT == 0) {
     }
-    TXREG = entrada[2];
+    TXREG = entrada[2]; //bit 3
     while (TRMT == 0) {
     }
-    TXREG = entrada[3];
+    TXREG = entrada[3]; //bit 4
     while (TRMT == 0) {
     }
     TXREG = 0x20;
