@@ -2760,17 +2760,33 @@ void Lcd_Shift_Left(void);
 uint8_t AADC(uint8_t banderaADC, uint8_t Num_Pot);
 # 33 "main.c" 2
 
+# 1 "./UART.h" 1
 
 
 
 
 
-uint8_t S1 ;
+
+
+
+void INIT_UART (void);
+void write (char *entrada);
+void read (void);
+# 34 "main.c" 2
+
+
+
+
+
+
+uint8_t S1;
 uint8_t S2;
-uint8_t banderaADC=1;
+uint8_t banderaADC = 1;
 uint8_t adc;
 uint8_t pot;
-uint8_t Num_Pot=1;
+uint8_t Num_Pot = 1;
+uint8_t mensaje;
+uint8_t contador = 0;
 
 double conversor;
 char s[20];
@@ -2784,11 +2800,13 @@ char s[20];
 void setup(void) {
     ANSEL = 0b00000011;
 
-    TRISC = 0b00000000;
+    TRISB = 0b00000000;
     TRISD = 0b00000000;
 
-    PORTC = 0;
+    PORTB = 0;
     PORTD = 0;
+
+
 
 
 }
@@ -2798,17 +2816,29 @@ void setup(void) {
 
 
 void __attribute__((picinterrupt(("")))) ISR(void) {
-    if (PIR1bits.ADIF==1){
-        if (pot ==1){
-            S1=ADRESH;
-            Num_Pot=0;
-            banderaADC=1;
-        }else if(pot ==0){
-            S2=ADRESH;
-            Num_Pot=1;
-            banderaADC=1;
+
+    if (PIR1bits.RCIF == 1) {
+        if (RCSTAbits.OERR == 1) {
+            RCSTAbits.CREN = 0;
+            _delay((unsigned long)((200)*(8000000/4000000.0)));
+        } else {
+            mensaje = RCREG;
         }
-        PIR1bits.ADIF=0;
+    }
+
+
+
+    if (PIR1bits.ADIF == 1) {
+        if (pot == 1) {
+            S1 = ADRESH;
+            Num_Pot = 0;
+            banderaADC = 1;
+        } else if (pot == 0) {
+            S2 = ADRESH;
+            Num_Pot = 1;
+            banderaADC = 1;
+        }
+        PIR1bits.ADIF = 0;
     }
 
 }
@@ -2816,24 +2846,42 @@ void __attribute__((picinterrupt(("")))) ISR(void) {
 void main(void) {
     unsigned int a;
     setup();
-
-
+    INIT_UART();
+    read();
     Lcd_Init();
+    Lcd_Clear();
     while (1) {
-       pot=AADC(banderaADC,Num_Pot);
+        pot = AADC(banderaADC, Num_Pot);
 
-        Lcd_Clear();
 
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String("S1:   S2:  S3:");
-        conversor= 0.0195*S1;
+        Lcd_Write_String("S1:   S2:    S3:");
+        conversor = 0.0195 * S1;
         Lcd_Set_Cursor(2, 1);
-        sprintf (s,"%3.2fV" ,conversor);
-        Lcd_Write_String (s);
-        conversor=0.0195*S2;
-         Lcd_Set_Cursor(2, 7);
-        sprintf (s,"%3.2fV" ,conversor);
-        Lcd_Write_String (s);
+        sprintf(s, "%3.2fV", conversor);
+        Lcd_Write_String(s);
+        conversor = 0.0195 * S2;
+        Lcd_Set_Cursor(2, 7);
+        sprintf(s, "%3.2fV", conversor);
+        Lcd_Write_String(s);
+
+        Lcd_Set_Cursor(2, 14);
+        sprintf(s, "%d", contador);
+        Lcd_Write_String(s);
+        write(s);
         _delay((unsigned long)((250)*(8000000/4000.0)));
+        if (mensaje == 0x2B) {
+            contador++;
+            mensaje = 0;
+        } else if (mensaje == 0x2D) {
+            contador--;
+            mensaje = 0;
+        }
+        if (contador >=0 && contador <10){
+            Lcd_Clear();
+        }
+
+
+
     }
 }

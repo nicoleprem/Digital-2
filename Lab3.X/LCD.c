@@ -11,19 +11,19 @@
 #define _XTAL_FREQ 8000000
     #define RS PORTDbits.RD2
     #define EN PORTDbits.RD3
-    #define C0 PORTCbits.RC0
-    #define C1 PORTCbits.RC1
-    #define C2 PORTCbits.RC2
-    #define C3 PORTCbits.RC3
-    #define C4 PORTCbits.RC4
-    #define C5 PORTCbits.RC5
-    #define C6 PORTCbits.RC6
-    #define C7 PORTCbits.RC7
+    #define C0 PORTCbits.RB0
+    #define C1 PORTCbits.RB1
+    #define C2 PORTCbits.RB2
+    #define C3 PORTCbits.RB3
+    #define C4 PORTCbits.RB4
+    #define C5 PORTCbits.RB5
+    #define C6 PORTCbits.RB6
+    #define C7 PORTCbits.RB7
 
 void Lcd_Port(char a)
 {
     
-    PORTC = a;
+    PORTB = a;
     
 
 }

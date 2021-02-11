@@ -1,4 +1,4 @@
-# 1 "LCD.c"
+# 1 "UART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "LCD.c" 2
-
+# 1 "UART.c" 2
 
 
 
@@ -2495,114 +2494,44 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 9 "LCD.c" 2
-
-# 1 "./LCD.h" 1
-# 12 "./LCD.h"
-void Lcd_Port(char a);
-void Lcd_Cmd(char a);
-void Lcd_Clear(void);
-void Lcd_Set_Cursor(char a, char b);
-void Lcd_Init(void);
-void Lcd_Write_Char(char a);
-void Lcd_Write_String(char *a);
-void Lcd_Shift_Right(void);
-void Lcd_Shift_Left(void);
-# 10 "LCD.c" 2
-# 23 "LCD.c"
-void Lcd_Port(char a)
-{
-
-    PORTB = a;
+# 8 "UART.c" 2
 
 
-}
-void Lcd_Cmd(char a)
-{
- PORTDbits.RD2 = 0;
- Lcd_Port(a);
- PORTDbits.RD3 = 1;
-        _delay((unsigned long)((4)*(8000000/4000.0)));
-        PORTDbits.RD3 = 0;
-}
-
-void Lcd_Clear(void)
-{
- Lcd_Cmd(0);
- Lcd_Cmd(1);
-}
-
-void Lcd_Set_Cursor(char a, char b)
-{
- char temp,z,y;
- if(a == 1)
- {
-   temp = 0x80 + b - 1;
-
-
-
-
-      Lcd_Cmd(temp);
- }
- else if(a == 2)
- {
-  temp = 0xC0 + b - 1;
-
-
-
-
-        Lcd_Cmd(temp);
- }
-}
-
-void Lcd_Init(void)
-{
-  Lcd_Port(0x00);
-   _delay((unsigned long)((20)*(8000000/4000.0)));
-  Lcd_Cmd(0x3F);
- _delay((unsigned long)((10)*(8000000/4000.0)));
-  Lcd_Cmd(0x3F);
- _delay((unsigned long)((200)*(8000000/4000000.0)));
-  Lcd_Cmd(0x3F);
-
-  Lcd_Cmd (0x32);
-  Lcd_Cmd (0x38);
-  Lcd_Cmd (0x0C);
-  Lcd_Cmd (0x06);
-# 92 "LCD.c"
-}
-
-void Lcd_Write_Char(char a)
-{
-   char temp,y;
-   temp = a&0x0F;
-   y = a&0xF0;
-   PORTDbits.RD2 = 1;
-   Lcd_Port(a);
-   PORTDbits.RD3 = 1;
-   _delay((unsigned long)((40)*(8000000/4000000.0)));
-   PORTDbits.RD3 = 0;
-
-
-   _delay((unsigned long)((40)*(8000000/4000000.0)));
+void INIT_UART (void) {
+    TRISC = 0b10000000;
+    TXSTAbits.SYNC = 0;
+    RCSTAbits.SPEN = 1;
+    PIE1bits.RCIE = 1;
+    INTCONbits.GIE = 1;
+    TXSTAbits.BRGH = 0;
+    BAUDCTLbits.BRG16 = 1;
+    TXSTAbits.TXEN = 1;
+    SPBRG = 25;
 
 }
 
-void Lcd_Write_String(char *a)
-{
- int i;
- for(i=0;a[i]!='\0';i++)
-    Lcd_Write_Char(a[i]);
-}
 
-void Lcd_Shift_Right(void)
-{
- Lcd_Cmd(0x01);
- Lcd_Cmd(0x0C);
+void write (char *entrada){
+    TXREG = entrada[0];
+    while (TRMT == 0) {
+    }
+    TXREG = entrada[1];
+    while (TRMT == 0) {
+    }
+    TXREG = entrada[2];
+    while (TRMT == 0) {
+    }
+    TXREG = entrada[3];
+    while (TRMT == 0) {
+    }
+    TXREG = 0x20;
+    while (TRMT == 0) {
+    }
 }
+void read (void) {
+    RCSTAbits.CREN = 1;
+    RCSTAbits.FERR = 0;
+    PIE1bits.RCIE = 1;
+    RCSTAbits.OERR = 0;
 
-void Lcd_Shift_Left(void)
-{
- Lcd_Cmd(0x01);
- Lcd_Cmd(0x08);
 }
