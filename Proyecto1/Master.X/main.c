@@ -1,16 +1,12 @@
 /*
- * File:   main.c
- * Author: Nicole Prem
+ * File:   newmain.c
+ * Author: User
  *
- * Created on 15 de febrero de 2021, 03:32 PM
+ * Created on 17 de febrero de 2021, 10:13 PM
  */
 
-
-#include <xc.h>
-#include "Libreria_ADC.h"
-#include <stdint.h>
 //*****************************************************************************
-//Configuraci贸n de la palabra
+//Configuraci髇 de palabra
 //*****************************************************************************
 // CONFIG1
 #pragma config FOSC = INTRC_CLKOUT// Oscillator Selection bits (INTOSC oscillator: CLKOUT function on RA6/OSC2/CLKOUT pin, I/O function on RA7/OSC1/CLKIN)
@@ -31,48 +27,55 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
+
+#include <xc.h>
+#include <stdint.h>
+#include <stdio.h> //Librer韆 para usar sprintf
+#include "LCD.h"
+#include "UART.h"
+#define _XTAL_FREQ 8000000
+
 //*****************************************************************************
 //Variables
 //*****************************************************************************
-#define XTAL_FREQ 8000000
-uint8_t banderaADC; //bandera del ADC
+uint8_t banderaADC = 1; //bandera del ADC
 uint8_t adc;
+uint8_t mensaje;
+char s[20];
+
 
 //*****************************************************************************
-//Declaraci贸n de entradas, salidas y limpieza de puertos
+//Declaraci髇 de entradas, salidas y limpieza de puertos
 //*****************************************************************************
-void setup (void){
-    ANSEL = 0x01; //Entrada anal贸gica
-    ANSELH = 0; //Entrada anal贸gica
-    INTCON = 0xE8; /*Activaci贸n de Global Interrupt Enable, Peripherial
-                          Interrupt E.,,Timer0 Overflow Interrupt E.,
-                          PortB interrupt on change*/
-     //bits de interrupciones
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
-    PORTEbits.RE0 = 1;
-    
-}
-
-//*****************************************************************************
-//Interrupciones
-//*****************************************************************************
-    
-void __interrupt() ISR(void) {
-    //Interrupcu贸n del ADC
-    if (PIR1bits.ADIF == 1) {
-        banderaADC = 1;
-        //valorI = ADRESH >> 4; //corrimiento para desplegar valor izquierda
-        //valorD = ADRESH & 0b00001111; //escoger bits para valor derecha
-        adc = ADRESH;
-        PIR1bits.ADIF = 0; //Se apaga bandera ADC
-    }
+void setup(void) {
+    ANSEL = 0b00000011; //Entrada anal骻ica
+    //ANSELH = 0; //Entrada analogicca
+    TRISB = 0b00000000; //Puerto para la LCD (D0-D7)
+    TRISD = 0b00000000; //Puerto para la LCD (RS y E)
+    //limpieza de puertos
+    PORTB = 0;
+    PORTD = 0;
+    //PORTA = 0;
 }
 
 void main(void) {
+    //************************************************************************
+    //Configuraci髇 del PIC como master
+    //************************************************************************
+    SSPCONbits.SSPEN == 1;
+    SSPSTATbits.SMP == 0;
+    
+    unsigned int a;
     setup();
-    banderaADC = 1;
+    INIT_UART();
+    read();
+    Lcd_Init();
+    Lcd_Clear();
     while (1) {
-        AADC(banderaADC);
-}
+        
+        //Comienzo de la impresi髇 de S1 y S2
+        //Lcd_Clear();       
+        Lcd_Set_Cursor(1, 1);
+        Lcd_Write_String("S1:   S2:    S3:"); //Primera fila
+    }
 }

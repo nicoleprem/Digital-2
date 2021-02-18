@@ -13,10 +13,11 @@ uint8_t banderaADC;
 
 
 void AADC (uint8_t banderaADC) {
-    ADCON1bits.ADFM = 0;
-    INTCON = 0b11101000; 
-    ANSEL = 0b00000001;
-    ADCON0 = 0b01000001;
+    ADCON1bits.ADFM = 0; //Right justified
+    INTCON = 0b11101000; //Habilitado: Interrupciones, interrupciones 
+    //periféricas, interrupción del Timer0, interrupciones PortB
+    ANSEL = 0b00000001; //Entrada analógica ANS0
+    ADCON0 = 0b01000001; //Fosc/8 y GO/DONE habilitado
     PIE1bits.ADIE = 1; //Habilitar ADC interrupt enable 
     PIR1bits.ADIF = 0; //ADC interrupt flag
     if (banderaADC == 1){
