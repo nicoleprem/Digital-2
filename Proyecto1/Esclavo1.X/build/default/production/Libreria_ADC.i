@@ -2636,11 +2636,12 @@ typedef uint16_t uintptr_t;
 uint8_t banderaADC;
 
 
-uint8_t AADC (uint8_t banderaADC) {
+void AADC (uint8_t banderaADC) {
     ADCON1bits.ADFM = 0;
     INTCON = 0b11101000;
-    ANSEL = 0b00000001;
-    ADCON0 = 0b01000001;
+
+    ANSEL = 0b00001100;
+    ADCON0 = 0b01110001;
     PIE1bits.ADIE = 1;
     PIR1bits.ADIF = 0;
     if (banderaADC == 1){

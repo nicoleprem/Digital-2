@@ -7,10 +7,21 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
+# 14 "main.c"
+#pragma config FOSC = INTRC_CLKOUT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config MCLRE = OFF
+#pragma config CP = OFF
+#pragma config CPD = OFF
+#pragma config BOREN = OFF
+#pragma config IESO = OFF
+#pragma config FCMEN = OFF
+#pragma config LVP = OFF
 
 
-
-
+#pragma config BOR4V = BOR40V
+#pragma config WRT = OFF
 
 
 
@@ -2495,7 +2506,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 9 "main.c" 2
+# 31 "main.c" 2
 
 # 1 "./Libreria_ADC.h" 1
 
@@ -2640,32 +2651,47 @@ typedef uint16_t uintptr_t;
 
 
 void AADC(uint8_t banderaADC);
-# 10 "main.c" 2
+# 32 "main.c" 2
+
+# 1 "./SPI.h" 1
+# 18 "./SPI.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+# 33 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 11 "main.c" 2
-
-
-
-
-
-#pragma config FOSC = INTRC_CLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
-
+# 34 "main.c" 2
 
 
 
@@ -2673,26 +2699,57 @@ void AADC(uint8_t banderaADC);
 
 uint8_t banderaADC;
 uint8_t adc;
+uint8_t esclavo1;
+void __attribute__((picinterrupt(("")))) ISR(void);
+void setup(void);
 
 
 
 
-void setup (void){
-    ANSEL = 0x01;
-    ANSELH = 0;
-    INTCON = 0xE8;
+void setup(void) {
 
+    TRISAbits.TRISA5 = 1;
+
+    TRISC = 0b00011000;
+    TRISB = 0b00000001;
+    TRISD = 0b00000000;
+    PORTD = 0;
+    PORTB = 0;
+    SSPIF = 0;
+    PORTAbits.RA5=1;
+    SSPIE = 1;
+    INTCON = 0b11101000;
 
 
 
 }
 
 
+
+
+
+void __attribute__((picinterrupt(("")))) ISR(void) {
+
+    if (PIR1bits.ADIF == 1) {
+        banderaADC = 1;
+        adc = ADRESH;
+        PORTD = adc;
+        PIR1bits.ADIF = 0;
+    }
+
+    if (PIR1bits.SSPIF == 1 && SSPSTATbits.BF == 1) {
+        esclavo1 = spiRead();
+        spiWrite(adc);
+        PIR1bits.SSPIF = 0;
+    }
+}
 
 void main(void) {
     setup();
     banderaADC = 1;
+    esclavo1 = 0;
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
         AADC(banderaADC);
-}
+    }
 }

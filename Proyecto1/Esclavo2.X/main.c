@@ -31,6 +31,7 @@ void setup (void){
     //bits de interrupciones
     IOCBbits.IOCB0 = 1;
     IOCBbits.IOCB1 = 1;
+}
 //*****************************************************************************
 //Interrupciones
 //*****************************************************************************
@@ -47,5 +48,12 @@ void __interrupt() ISR(void) {
 
 }
 void main(void) {
-    return;
+        while (1) {
+
+            setup();
+            count = 0; //condición inicial de los leds, todos apagados
+            while (1) {
+                PORTD = count;
+            }
+        }
 }

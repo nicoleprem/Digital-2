@@ -2745,7 +2745,14 @@ extern int printf(const char *, ...);
 # 33 "main.c" 2
 
 # 1 "./LCD.h" 1
-# 11 "./LCD.h"
+
+
+
+
+
+
+
+
 void Lcd_Port(char a);
 void Lcd_Cmd(char a);
 void Lcd_Clear(void);
@@ -2771,47 +2778,105 @@ void write (char *entrada);
 void read (void);
 # 35 "main.c" 2
 
+# 1 "./SPI.h" 1
+# 17 "./SPI.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+# 36 "main.c" 2
 
 
 
 
-
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 40 "main.c" 2
+# 50 "main.c"
 uint8_t banderaADC = 1;
 uint8_t adc;
 uint8_t mensaje;
+uint8_t esclavo1;
 char s[20];
+float x;
+
 
 
 
 
 
 void setup(void) {
-    ANSEL = 0b00000011;
-
-    TRISB = 0b00000000;
     TRISD = 0b00000000;
-
-    PORTB = 0;
+    TRISC = 0b10010000;
+    TRISE = 0b00000000;
+    TRISB = 0b00000000;
+    ANSEL = 0b00000011;
+    PORTC = 0;
     PORTD = 0;
+    PORTE = 0;
+    PORTB = 0;
+    PORTAbits.RA0 = 1;
 
 }
 
 void main(void) {
 
 
-
-
-    unsigned int a;
     setup();
-    INIT_UART();
-    read();
+
+
     Lcd_Init();
     Lcd_Clear();
+
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
 
 
 
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String("S1:   S2:    S3:");
+        x = adc * 0.0195;
+        Lcd_Set_Cursor(2, 1);
+        sprintf(s, "%3.2fV", x);
+        Lcd_Write_String(s);
+
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC0 = 0;
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        SSPBUF = 0;
+        adc = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC0 = 1;
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
     }
+
 }

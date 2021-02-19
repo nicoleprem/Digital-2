@@ -6,9 +6,7 @@
  */
 
 
-#include <xc.h>
-#include "Libreria_ADC.h"
-#include <stdint.h>
+
 //*****************************************************************************
 //Configuración de la palabra
 //*****************************************************************************
@@ -30,49 +28,67 @@
 
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
-
+#include <xc.h>
+#include "Libreria_ADC.h"
+#include "SPI.h"
+#include <stdint.h>
 //*****************************************************************************
 //Variables
 //*****************************************************************************
 #define XTAL_FREQ 8000000
 uint8_t banderaADC; //bandera del ADC
 uint8_t adc;
-
+uint8_t esclavo1;
+void __interrupt() ISR(void);
+void setup(void);
 //*****************************************************************************
 //Declaración de entradas, salidas y limpieza de puertos
 //*****************************************************************************
-void setup (void){
-    ANSEL = 0x01; //Entrada analógica
-    ANSELH = 0; //Entrada analógica
-    INTCON = 0xE8; /*Activación de Global Interrupt Enable, Peripherial
-                          Interrupt E.,,Timer0 Overflow Interrupt E.,
-                          PortB interrupt on change*/
-     //bits de interrupciones
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
-    PORTEbits.RE0 = 1;
-    
+
+void setup(void) {
+    //    TRISA = 0b11111111; //puerto A configurado como input
+    TRISAbits.TRISA5 = 1;
+//    PORTA = 0;
+    TRISC = 0b00011000;
+    TRISB = 0b00000001;
+    TRISD = 0b00000000;
+    PORTD = 0;
+    PORTB = 0;
+    SSPIF = 0;
+    PORTAbits.RA5=1;
+    SSPIE = 1;
+    INTCON = 0b11101000; //se configuran las interrupciones GIE, PIE, T0IE y RBIE
+
+
+
 }
 
 //*****************************************************************************
 //Interrupciones
 //*****************************************************************************
-    
+
 void __interrupt() ISR(void) {
     //Interrupcuón del ADC
     if (PIR1bits.ADIF == 1) {
         banderaADC = 1;
-        //valorI = ADRESH >> 4; //corrimiento para desplegar valor izquierda
-        //valorD = ADRESH & 0b00001111; //escoger bits para valor derecha
         adc = ADRESH;
+        PORTD = adc;
         PIR1bits.ADIF = 0; //Se apaga bandera ADC
+    }
+    //Interrupción del SPI
+    if (PIR1bits.SSPIF == 1 && SSPSTATbits.BF == 1) {
+        esclavo1 = spiRead();
+        spiWrite(adc);
+        PIR1bits.SSPIF = 0;
     }
 }
 
 void main(void) {
     setup();
     banderaADC = 1;
+    esclavo1 = 0;
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
         AADC(banderaADC);
-}
+    }
 }

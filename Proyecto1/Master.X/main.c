@@ -33,6 +33,15 @@
 #include <stdio.h> //Librería para usar sprintf
 #include "LCD.h"
 #include "UART.h"
+#include "SPI.h"
+#define _XTAL_FREQ 8000000
+
+#include <xc.h>
+#include <stdint.h>
+#include <stdio.h> //Librería para usar sprintf
+#include "LCD.h"
+#include "UART.h"
+#include "SPI.h"
 #define _XTAL_FREQ 8000000
 
 //*****************************************************************************
@@ -41,41 +50,62 @@
 uint8_t banderaADC = 1; //bandera del ADC
 uint8_t adc;
 uint8_t mensaje;
+uint8_t esclavo1; //variable para leer al esclavo 1
 char s[20];
+float x;
 
 
 //*****************************************************************************
 //Declaración de entradas, salidas y limpieza de puertos
 //*****************************************************************************
+
 void setup(void) {
-    ANSEL = 0b00000011; //Entrada analógica
-    //ANSELH = 0; //Entrada analogicca
-    TRISB = 0b00000000; //Puerto para la LCD (D0-D7)
-    TRISD = 0b00000000; //Puerto para la LCD (RS y E)
-    //limpieza de puertos
-    PORTB = 0;
+    TRISD = 0b00000000; // puerto D como salida
+    TRISC = 0b10010000; //activamos el RX como entrada
+    TRISE = 0b00000000;
+    TRISB = 0b00000000;
+    ANSEL = 0b00000011;
+    PORTC = 0; //limpiamos puertos
     PORTD = 0;
-    //PORTA = 0;
+    PORTE = 0;
+    PORTB = 0;
+    PORTAbits.RA0 = 1;
+
 }
 
 void main(void) {
-    //************************************************************************
-    //Configuración del PIC como master
-    //************************************************************************
-    SSPCONbits.SSPEN == 1;
-    SSPSTATbits.SMP == 0;
-    
-    unsigned int a;
+
+    //    unsigned int a;
     setup();
-    INIT_UART();
-    read();
+    //    INIT_UART();
+    //    read();
     Lcd_Init();
     Lcd_Clear();
+    //    PORTCbits.RC0 = 1;
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
-        
+
         //Comienzo de la impresión de S1 y S2
         //Lcd_Clear();       
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String("S1:   S2:    S3:"); //Primera fila
+        x = adc * 0.0195;
+        Lcd_Set_Cursor(2, 1); //Posición S1
+        sprintf(s, "%3.2fV", x); //Valor S1
+        Lcd_Write_String(s);
+
+        __delay_ms(1);
+        PORTCbits.RC0 = 0;
+        __delay_ms(1);
+        SSPBUF = 0;
+        adc = spiRead();
+        __delay_ms(1);
+        PORTCbits.RC0 = 1;
+        __delay_ms(200);
+
     }
+
 }
+
+
+

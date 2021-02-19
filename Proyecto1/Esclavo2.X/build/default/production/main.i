@@ -2655,6 +2655,7 @@ void setup (void){
 
     IOCBbits.IOCB0 = 1;
     IOCBbits.IOCB1 = 1;
+}
 
 
 
@@ -2671,5 +2672,12 @@ void __attribute__((picinterrupt(("")))) ISR(void) {
 
 }
 void main(void) {
-    return;
+        while (1) {
+
+            setup();
+            count = 0;
+            while (1) {
+                PORTD = count;
+            }
+        }
 }
