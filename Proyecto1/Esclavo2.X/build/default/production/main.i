@@ -2687,7 +2687,7 @@ char spiRead();
 
 uint8_t count;
 uint8_t flag;
-uint8_t esclavo2;
+uint8_t esclavo1;
 
 
 
@@ -2705,7 +2705,7 @@ void setup(void) {
 
 
     TRISD = 0b00000000;
-    TRISC = 0b00011000;
+
 
     PORTB = 0;
     PORTD = 0;
@@ -2716,6 +2716,9 @@ void setup(void) {
     SSPIF = 0;
     PORTAbits.RA5 = 1;
     SSPIE = 1;
+    INTCON = 0b11101000;
+
+    TRISCbits.TRISC3 = 0;
 }
 
 
@@ -2746,7 +2749,7 @@ void __attribute__((picinterrupt(("")))) ISR(void) {
 
 
         if (PIR1bits.SSPIF == 1){
-            esclavo2 = spiRead();
+            esclavo1 = spiRead();
             spiWrite(count);
             PIR1bits.SSPIF = 0;
         }
@@ -2758,7 +2761,8 @@ void __attribute__((picinterrupt(("")))) ISR(void) {
 
 void main(void) {
     setup();
-    count = 0;
+
+    esclavo1 = 0;
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
 

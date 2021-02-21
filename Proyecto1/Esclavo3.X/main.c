@@ -95,20 +95,20 @@ void main(void) {
         LM(banderaLM);
         conversor = 1.95 * lmm;
         if (conversor < 21) {
-            PORTDbits.RD2 = 1; //encender color verde
+            PORTDbits.RD0 = 1; //encender color verde
             PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 0;
+            PORTDbits.RD2 = 0;
             __delay_ms(500);
         }
         else if (conversor > 21 && conversor < 36) {
-            PORTDbits.RD2 = 0;
-            PORTDbits.RD1 = 1; //encender color amarillo
             PORTDbits.RD0 = 0;
+            PORTDbits.RD1 = 1; //encender color amarillo
+            PORTDbits.RD2 = 0;
             __delay_ms(500);
         } else if (conversor > 36) {
-            PORTDbits.RD2 = 0;
+            PORTDbits.RD0 = 0;
             PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 1; //encender color verde
+            PORTDbits.RD2 = 1; //encender color rojo
             __delay_ms(500);
         }
 

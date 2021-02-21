@@ -2715,6 +2715,7 @@ uint8_t conversor;
 
 
 
+
 void __attribute__((picinterrupt(("")))) ISR(void);
 void setup(void);
 
@@ -2764,20 +2765,20 @@ void main(void) {
         LM(banderaLM);
         conversor = 1.95 * lmm;
         if (conversor < 21) {
-            PORTDbits.RD2 = 1;
+            PORTDbits.RD0 = 1;
             PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 0;
+            PORTDbits.RD2 = 0;
             _delay((unsigned long)((500)*(8000000/4000.0)));
         }
         else if (conversor > 21 && conversor < 36) {
-            PORTDbits.RD2 = 0;
-            PORTDbits.RD1 = 1;
             PORTDbits.RD0 = 0;
+            PORTDbits.RD1 = 1;
+            PORTDbits.RD2 = 0;
             _delay((unsigned long)((500)*(8000000/4000.0)));
         } else if (conversor > 36) {
-            PORTDbits.RD2 = 0;
+            PORTDbits.RD0 = 0;
             PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 1;
+            PORTDbits.RD2 = 1;
             _delay((unsigned long)((500)*(8000000/4000.0)));
         }
 

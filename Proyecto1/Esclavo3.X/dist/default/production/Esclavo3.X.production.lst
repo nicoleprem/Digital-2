@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Sat Feb 20 17:38:52 2021
+                                                                                               Sat Feb 20 18:50:11 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -626,7 +626,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    612 ;;
    613 ;; *************** function _main *****************
    614 ;; Defined at:
-   615 ;;		line 88 in file "main.c"
+   615 ;;		line 89 in file "main.c"
    616 ;; Parameters:    Size  Location     Type
    617 ;;		None
    618 ;; Auto vars:     Size  Location     Type
@@ -748,9 +748,9 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    734  0495  2CA8               	goto	l1657
    735  0496                     u2140:
    736  0496                     l1653:
-   737  0496  1508               	bsf	8,2	;volatile
+   737  0496  1408               	bsf	8,0	;volatile
    738  0497  1088               	bcf	8,1	;volatile
-   739  0498  1008               	bcf	8,0	;volatile
+   739  0498  1108               	bcf	8,2	;volatile
    740  0499                     l1655:
    741  0499  3006               	movlw	6
    742  049A  1283               	bcf	3,5	;RP0=0, select bank0
@@ -787,9 +787,9 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    773  04B3  2CB8               	goto	l1665
    774  04B4                     u2160:
    775  04B4                     l1661:
-   776  04B4  1108               	bcf	8,2	;volatile
+   776  04B4  1008               	bcf	8,0	;volatile
    777  04B5  1488               	bsf	8,1	;volatile
-   778  04B6  1008               	bcf	8,0	;volatile
+   778  04B6  1108               	bcf	8,2	;volatile
    779  04B7  2C99               	goto	l1655
    780  04B8                     l1665:
    781  04B8  3025               	movlw	37
@@ -801,9 +801,9 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    787  04BD  2CC2               	goto	l63
    788  04BE                     u2170:
    789  04BE                     l1667:
-   790  04BE  1108               	bcf	8,2	;volatile
+   790  04BE  1008               	bcf	8,0	;volatile
    791  04BF  1088               	bcf	8,1	;volatile
-   792  04C0  1408               	bsf	8,0	;volatile
+   792  04C0  1508               	bsf	8,2	;volatile
    793  04C1  2C99               	goto	l1655
    794  04C2                     l63:
    795  04C2  2C47               	goto	l1647
@@ -916,7 +916,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    901  05D9                     __ptext2:	
    902 ;; *************** function _setup *****************
    903 ;; Defined at:
-   904 ;;		line 55 in file "main.c"
+   904 ;;		line 56 in file "main.c"
    905 ;; Parameters:    Size  Location     Type
    906 ;;		None
    907 ;; Auto vars:     Size  Location     Type
@@ -952,47 +952,47 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    937                           ; Regs used in _setup: [wreg+status,2]
    938                           
    939                           
-   940                           ;main.c: 56:     setup();
+   940                           ;main.c: 57:     setup();
    941  05D9  1683               	bsf	3,5	;RP0=1, select bank1
    942  05DA  1303               	bcf	3,6	;RP1=0, select bank1
    943  05DB  1685               	bsf	5,5	;volatile
    944  05DC                     l1077:
    945                           
-   946                           ;main.c: 57:     banderaLM = 1;
+   946                           ;main.c: 58:     banderaLM = 1;
    947  05DC  0188               	clrf	8	;volatile
    948  05DD                     l1079:
    949                           
-   950                           ;main.c: 58:     esclavo3 = 0;
+   950                           ;main.c: 59:     esclavo3 = 0;
    951  05DD  3001               	movlw	1
    952  05DE  0086               	movwf	6	;volatile
    953  05DF                     l1081:
    954                           
-   955                           ;main.c: 59:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SP
+   955                           ;main.c: 60:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SP
       +                          I_IDLE_2_ACTIVE);
    956  05DF  1283               	bcf	3,5	;RP0=0, select bank0
    957  05E0  1303               	bcf	3,6	;RP1=0, select bank0
    958  05E1  0186               	clrf	6	;volatile
    959  05E2                     l1083:
    960                           
-   961                           ;main.c: 60:     while (1) {
+   961                           ;main.c: 61:     while (1) {
    962  05E2  0188               	clrf	8	;volatile
    963  05E3                     l1085:
    964                           
-   965                           ;main.c: 61:         LM(banderaLM);
+   965                           ;main.c: 62:         LM(banderaLM);
    966  05E3  118C               	bcf	12,3	;volatile
    967  05E4                     l1087:
    968                           
-   969                           ;main.c: 62:         conversor = 1.95 * lmm;
+   969                           ;main.c: 63:         conversor = 1.95 * lmm;
    970  05E4  1685               	bsf	5,5	;volatile
    971  05E5                     l1089:
    972                           
-   973                           ;main.c: 63:         if (conversor < 21) {
+   973                           ;main.c: 64:         if (conversor < 21) {
    974  05E5  1683               	bsf	3,5	;RP0=1, select bank1
    975  05E6  1303               	bcf	3,6	;RP1=0, select bank1
    976  05E7  158C               	bsf	12,3	;volatile
    977  05E8                     l1091:
    978                           
-   979                           ;main.c: 64:             PORTDbits.RD2 = 1;
+   979                           ;main.c: 65:             PORTDbits.RD0 = 1;
    980  05E8  30E8               	movlw	232
    981  05E9  008B               	movwf	11	;volatile
    982  05EA                     l49:
@@ -2713,7 +2713,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   2697  0542                     __ptext8:	
   2698 ;; *************** function _ISR *****************
   2699 ;; Defined at:
-  2700 ;;		line 72 in file "main.c"
+  2700 ;;		line 73 in file "main.c"
   2701 ;; Parameters:    Size  Location     Type
   2702 ;;		None
   2703 ;; Auto vars:     Size  Location     Type
@@ -2747,7 +2747,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   2731  0542                     _ISR:
   2732  0542                     i1l1347:
   2733                           
-  2734                           ;main.c: 74:         } else if (conversor > 36) {
+  2734                           ;main.c: 75:         } else if (conversor > 36) {
   2735  0542  1283               	bcf	3,5	;RP0=0, select bank0
   2736  0543  1303               	bcf	3,6	;RP1=0, select bank0
   2737  0544  1F0C               	btfss	12,6	;volatile
@@ -2758,23 +2758,23 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   2742  0548                     u142_20:
   2743  0548                     i1l1349:
   2744                           
-  2745                           ;main.c: 75:             PORTDbits.RD2 = 0;
+  2745                           ;main.c: 76:             PORTDbits.RD0 = 0;
   2746  0548  01D8               	clrf	_banderaLM
   2747  0549  0AD8               	incf	_banderaLM,f
   2748  054A                     i1l1351:
   2749                           
-  2750                           ;main.c: 76:             PORTDbits.RD1 = 0;
+  2750                           ;main.c: 77:             PORTDbits.RD1 = 0;
   2751  054A  081E               	movf	30,w	;volatile
   2752  054B  00F1               	movwf	??_ISR
   2753  054C  0871               	movf	??_ISR,w
   2754  054D  00F9               	movwf	_lmm
   2755  054E                     i1l1353:
   2756                           
-  2757                           ;main.c: 78:             _delay((unsigned long)((500)*(8000000/4000.0)));
+  2757                           ;main.c: 79:             _delay((unsigned long)((500)*(8000000/4000.0)));
   2758  054E  130C               	bcf	12,6	;volatile
   2759  054F                     i1l1355:
   2760                           
-  2761                           ;main.c: 81:     }
+  2761                           ;main.c: 82:     }
   2762  054F  1D8C               	btfss	12,3	;volatile
   2763  0550  2D52               	goto	u143_21
   2764  0551  2D53               	goto	u143_20
@@ -2792,7 +2792,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   2776  0559                     u144_20:
   2777  0559                     i1l1359:
   2778                           
-  2779                           ;main.c: 82: }
+  2779                           ;main.c: 83: }
   2780  0559  120A  118A  25EB  120A  118A  	fcall	_spiRead
   2781  055E  00F1               	movwf	??_ISR
   2782  055F  0871               	movf	??_ISR,w
@@ -3194,7 +3194,7 @@ DATA                 0      0      43      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Sat Feb 20 17:38:52 2021
+Symbol Table                                                                                   Sat Feb 20 18:50:11 2021
 
             _SSPSTATbits 0094                       l63 04C2                       l49 05EA  
                      l91 05BA                       _LM 059A      __Umul8_16@word_mpld 0024  

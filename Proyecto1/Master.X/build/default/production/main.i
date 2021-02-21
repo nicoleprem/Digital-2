@@ -2826,9 +2826,13 @@ uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1;
 uint8_t lmm=0;
+uint8_t count=0;
 char s[20];
+char l[20];
+char c[20];
 float x;
 float p;
+float n;
 
 
 
@@ -2846,6 +2850,7 @@ void setup(void) {
     PORTE = 0;
     PORTB = 0;
     PORTAbits.RA0 = 1;
+    PORTAbits.RA1 = 1;
 
 }
 
@@ -2871,13 +2876,17 @@ void main(void) {
         Lcd_Write_String(s);
 
 
+        n = 1*count;
+        Lcd_Set_Cursor(2, 8);
+        sprintf(c, "%d", count);
+        Lcd_Write_String(c);
 
 
         p = 1.95 * lmm;
 
-        Lcd_Set_Cursor(2, 9);
-        sprintf(s, "%3.0fC", p);
-        Lcd_Write_String(s);
+        Lcd_Set_Cursor(2, 13);
+        sprintf(l, "%3.0fC", p);
+        Lcd_Write_String(l);
 
 
 
@@ -2894,13 +2903,20 @@ void main(void) {
         _delay((unsigned long)((200)*(8000000/4000.0)));
 
 
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+        PORTCbits.RC1 = 0;
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+        SSPBUF = 0;
+        count = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC1 = 1;
+        _delay((unsigned long)((200)*(8000000/4000.0)));
 
 
         _delay((unsigned long)((10)*(8000000/4000.0)));
         PORTCbits.RC2 = 0;
         _delay((unsigned long)((10)*(8000000/4000.0)));
         SSPBUF = 0;
-
         lmm = spiRead();
         _delay((unsigned long)((1)*(8000000/4000.0)));
         PORTCbits.RC2 = 1;

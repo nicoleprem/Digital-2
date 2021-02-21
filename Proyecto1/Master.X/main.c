@@ -52,9 +52,13 @@ uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1; //variable para leer al esclavo 1
 uint8_t lmm=0;
+uint8_t count=0;
 char s[20];
+char l[20];
+char c[20];
 float x;
 float p;
+float n;
 
 
 //*****************************************************************************
@@ -72,6 +76,7 @@ void setup(void) {
     PORTE = 0;
     PORTB = 0;
     PORTAbits.RA0 = 1;
+    PORTAbits.RA1 = 1;
 
 }
 
@@ -95,15 +100,19 @@ void main(void) {
         Lcd_Set_Cursor(2, 1); //Posición S1
         sprintf(s, "%3.2fV", x); //Valor S1
         Lcd_Write_String(s);
+        
         //Contador
-
-
+        n = 1*count;
+        Lcd_Set_Cursor(2, 8);
+        sprintf(c, "%d", count);
+        Lcd_Write_String(c);
+        
         //Temperatura
         p = 1.95 * lmm;
         //Lcd_Clear();
-        Lcd_Set_Cursor(2, 9); //Posición S1
-        sprintf(s, "%3.0fC", p); //Valor S1
-        Lcd_Write_String(s);
+        Lcd_Set_Cursor(2, 13); //Posición S1
+        sprintf(l, "%3.0fC", p); //Valor S1
+        Lcd_Write_String(l);
 
 
 
@@ -120,13 +129,20 @@ void main(void) {
         __delay_ms(200);
         
         //Contador
+        __delay_ms(10);
+        PORTCbits.RC1 = 0;
+        __delay_ms(10);
+        SSPBUF = 0;
+        count = spiRead();
+        __delay_ms(1);
+        PORTCbits.RC1 = 1;
+        __delay_ms(200);
         
         //Temperatura
         __delay_ms(10);
         PORTCbits.RC2 = 0;
         __delay_ms(10);
         SSPBUF = 0;
-
         lmm = spiRead();
         __delay_ms(1);
         PORTCbits.RC2 = 1;

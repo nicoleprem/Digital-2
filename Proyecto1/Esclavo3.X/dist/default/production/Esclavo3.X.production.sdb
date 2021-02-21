@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"92 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
+"93 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
 [e E1294 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -61,11 +61,11 @@ SPI_ACTIVE_2_IDLE 64
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "21 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\LM35.c
 [v _LM LM `(v  1 e 1 0 ]
-"55 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
+"56 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
 [v _setup setup `(v  1 e 1 0 ]
-"72
+"73
 [v _ISR ISR `II(v  1 e 1 0 ]
-"88
+"89
 [v _main main `(v  1 e 1 0 ]
 "13 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\SPI.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -246,10 +246,10 @@ SPI_ACTIVE_2_IDLE 64
 [v _esclavo3 esclavo3 `uc  1 e 1 0 ]
 "43
 [v _conversor conversor `uc  1 e 1 0 ]
-"88
+"89
 [v _main main `(v  1 e 1 0 ]
 {
-"115
+"116
 } 0
 "13 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\SPI.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -263,10 +263,10 @@ SPI_ACTIVE_2_IDLE 64
 [v spiInit@sType sType `E1264  1 a 1 4 ]
 "28
 } 0
-"55 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
+"56 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"66
+"67
 } 0
 "10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
@@ -340,10 +340,10 @@ SPI_ACTIVE_2_IDLE 64
 [v LM@banderaLM banderaLM `uc  1 a 1 5 ]
 "40
 } 0
-"72 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
+"73 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"86
+"87
 } 0
 "35 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo3.X\SPI.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]

@@ -37,7 +37,7 @@
 
 uint8_t count; //contador de 8 bits
 uint8_t flag;
-uint8_t esclavo2;
+uint8_t esclavo1;
 
 //*****************************************************************************
 //Prototipos de funciones
@@ -55,7 +55,7 @@ void setup(void) {
                           Interrupt E.,,Timer0 Overflow Interrupt E.,
                           PortB interrupt on change*/
     TRISD = 0b00000000; //Puerto de los led del contador
-    TRISC = 0b00011000;
+   // TRISC = 0b00011000;
     //limpieza de puertos
     PORTB = 0;
     PORTD = 0;
@@ -66,6 +66,9 @@ void setup(void) {
     SSPIF = 0;
     PORTAbits.RA5 = 1;
     SSPIE = 1;
+    INTCON = 0b11101000; //se configuran las interrupciones GIE, PIE, T0IE y RBIE
+    //Nuevo
+    TRISCbits.TRISC3 = 0;
 }
 //*****************************************************************************
 //Interrupciones
@@ -96,7 +99,7 @@ void __interrupt() ISR(void) {
         
         //Interrupción SPI
         if (PIR1bits.SSPIF == 1){ //&& SSPSTATbits.BF == 1) {
-            esclavo2 = spiRead();
+            esclavo1 = spiRead();
             spiWrite(count);
             PIR1bits.SSPIF = 0;
         }
@@ -108,7 +111,8 @@ void __interrupt() ISR(void) {
 
 void main(void) {
     setup();
-    count = 0;
+    //count = 0;
+    esclavo1 = 0;
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
         //        __delay_ms(500);
