@@ -1,3 +1,4 @@
+//Misma librería que la del ADC
 
 #ifndef LM35
 #define	LM35

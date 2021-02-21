@@ -4,7 +4,7 @@
  *
  * Created on 18 de febrero de 2021, 04:19 PM
  */
-
+//Misma librería que el ADC 
 
 #include <xc.h>
 #include <stdint.h>

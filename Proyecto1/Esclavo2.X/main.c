@@ -63,11 +63,11 @@ void setup(void) {
     IOCBbits.IOCB6 = 1; //boton 1
     IOCBbits.IOCB7 = 1; //boton 2
     flag = 0;
+    //Bits de comunicación SPI
     SSPIF = 0;
     PORTAbits.RA5 = 1;
     SSPIE = 1;
     INTCON = 0b11101000; //se configuran las interrupciones GIE, PIE, T0IE y RBIE
-    //Nuevo
     TRISCbits.TRISC3 = 0;
 }
 //*****************************************************************************

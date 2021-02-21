@@ -54,12 +54,11 @@ void setup(void) {
     TRISD = 0b00000000;
     PORTD = 0;
     PORTB = 0;
+    //Bits para comunicación SPI
     SSPIF = 0;
     PORTAbits.RA5=1;
     SSPIE = 1;
     INTCON = 0b11101000; //se configuran las interrupciones GIE, PIE, T0IE y RBIE
-
-
 
 }
 

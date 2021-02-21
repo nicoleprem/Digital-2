@@ -2827,10 +2827,11 @@ uint8_t mensaje;
 uint8_t esclavo1;
 uint8_t lmm = 0;
 uint8_t count;
+
 char s[20];
 char l[20];
 char c[20];
-unsigned char CC;
+
 float x;
 float p;
 float n;
@@ -2857,7 +2858,7 @@ void setup(void) {
     PORTAbits.RA1 = 1;
 
 }
-# 102 "main.c"
+
 void main(void) {
 
     setup();
@@ -2874,6 +2875,8 @@ void main(void) {
 
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String("S1:   S2:    S3: \n");
+
+
         write("S1:");
         write(s);
         write("S2:");
@@ -2881,21 +2884,17 @@ void main(void) {
         write("S3:");
         write(l);
         write(0xA);
+
+
         x = adc * 0.0195;
         Lcd_Set_Cursor(2, 1);
         sprintf(s, "%3.2fV", x);
         Lcd_Write_String(s);
 
 
-
-
-
-
-        n = 1 * count;
         Lcd_Set_Cursor(2, 8);
         sprintf(c, "%d", count);
         Lcd_Write_String(c);
-
 
 
         p = 1.95 * lmm;
@@ -2903,9 +2902,6 @@ void main(void) {
         Lcd_Set_Cursor(2, 13);
         sprintf(l, "%3.0fC", p);
         Lcd_Write_String(l);
-
-
-
 
 
 
@@ -2938,7 +2934,6 @@ void main(void) {
         _delay((unsigned long)((1)*(8000000/4000.0)));
         PORTCbits.RC2 = 1;
         _delay((unsigned long)((200)*(8000000/4000.0)));
-
 
     }
 

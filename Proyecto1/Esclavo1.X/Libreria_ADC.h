@@ -1,4 +1,5 @@
- 
+//Misma librería del lab 2 y 3
+
 #ifndef Libreria_ADC
 #define	Libreria_ADC
 

@@ -59,6 +59,7 @@ void setup(void) {
     TRISB = 0b00000001;
     PORTB = 0;
     PORTD = 0;
+    //Bits de comunicación SPI
     SSPIF = 0;
     PORTAbits.RA5 = 1;
     SSPIE = 1;
@@ -94,6 +95,7 @@ void main(void) {
     while (1) {
         LM(banderaLM);
         conversor = 1.95 * lmm;
+        //Configuración del semáforo dependiendo de la temperatura
         if (conversor < 21) {
             PORTDbits.RD0 = 1; //encender color verde
             PORTDbits.RD1 = 0;

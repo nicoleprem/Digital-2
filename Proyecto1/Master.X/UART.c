@@ -3,7 +3,7 @@
  * Author: Nicole Prem
  * Created on 9 de febrero de 2021, 09:42 PM
  */
-
+//Misma librería del Lab3
 
 #include <xc.h>
 #define _XTAL_FREQ 8000000

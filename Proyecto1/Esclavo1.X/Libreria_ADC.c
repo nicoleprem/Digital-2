@@ -5,7 +5,7 @@
  * Created on 15 de febrero de 2021, 03:33 PM
  */
 
-
+//Misma libería del lab 2 con modificación de pines
 #include <xc.h>
 #include <stdint.h>
 #define _XTAL_FREQ 8000000

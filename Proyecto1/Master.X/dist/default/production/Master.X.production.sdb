@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"105 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
+"91 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
 [e E1368 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -107,9 +107,9 @@ SPI_ACTIVE_2_IDLE 64
 [v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
 "67
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
-"72 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
+"73 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
 [v _setup setup `(v  1 e 1 0 ]
-"102
+"88
 [v _main main `(v  1 e 1 0 ]
 "12 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\SPI.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -161,7 +161,7 @@ SPI_ACTIVE_2_IDLE 64
 "427
 [u S28 . 1 `S23 1 . 1 0 ]
 [v _PORTEbits PORTEbits `VES28  1 e 1 @9 ]
-[s S334 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S333 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -171,18 +171,18 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 GIE 1 0 :1:7 
 ]
 "482
-[s S343 . 1 `uc 1 . 1 0 :2:0 
+[s S342 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S348 . 1 `S334 1 . 1 0 `S343 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES348  1 e 1 @11 ]
+[u S347 . 1 `S333 1 . 1 0 `S342 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES347  1 e 1 @11 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-[s S271 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S270 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -192,25 +192,25 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 SPEN 1 0 :1:7 
 ]
 "1068
-[s S280 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S279 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S284 . 1 `uc 1 . 1 0 :6:0 
+[s S283 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 nRC8 1 0 :1:6 
 ]
-[s S287 . 1 `uc 1 . 1 0 :6:0 
+[s S286 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[u S290 . 1 `S271 1 . 1 0 `S280 1 . 1 0 `S284 1 . 1 0 `S287 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES290  1 e 1 @24 ]
+[u S289 . 1 `S270 1 . 1 0 `S279 1 . 1 0 `S283 1 . 1 0 `S286 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES289  1 e 1 @24 ]
 "1133
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1540
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
-[s S213 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S212 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -220,13 +220,13 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1557
-[u S222 . 1 `S213 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES222  1 e 1 @135 ]
+[u S221 . 1 `S212 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES221  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "1664
 [v _TRISE TRISE `VEuc  1 e 1 @137 ]
-[s S315 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S314 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -235,11 +235,11 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 ADIE 1 0 :1:6 
 ]
 "1718
-[u S323 . 1 `S315 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES323  1 e 1 @140 ]
+[u S322 . 1 `S314 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES322  1 e 1 @140 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S461 . 1 `uc 1 BF 1 0 :1:0 
+[s S460 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -249,40 +249,40 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 SMP 1 0 :1:7 
 ]
 "2231
-[s S470 . 1 `uc 1 . 1 0 :2:0 
+[s S469 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S475 . 1 `uc 1 . 1 0 :2:0 
+[s S474 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DATA 1 0 :1:5 
 ]
-[s S481 . 1 `uc 1 . 1 0 :2:0 
+[s S480 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S486 . 1 `uc 1 . 1 0 :2:0 
+[s S485 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S491 . 1 `uc 1 . 1 0 :2:0 
+[s S490 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S496 . 1 `uc 1 . 1 0 :2:0 
+[s S495 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[u S501 . 1 `S461 1 . 1 0 `S470 1 . 1 0 `S475 1 . 1 0 `S481 1 . 1 0 `S486 1 . 1 0 `S491 1 . 1 0 `S496 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES501  1 e 1 @148 ]
-[s S234 . 1 `uc 1 TX9D 1 0 :1:0 
+[u S500 . 1 `S460 1 . 1 0 `S469 1 . 1 0 `S474 1 . 1 0 `S480 1 . 1 0 `S485 1 . 1 0 `S490 1 . 1 0 `S495 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES500  1 e 1 @148 ]
+[s S233 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -292,18 +292,18 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S243 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S242 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S247 . 1 `uc 1 . 1 0 :6:0 
+[s S246 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S250 . 1 `S234 1 . 1 0 `S243 1 . 1 0 `S247 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES250  1 e 1 @152 ]
+[u S249 . 1 `S233 1 . 1 0 `S242 1 . 1 0 `S246 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES249  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
-[s S366 . 1 `uc 1 ABDEN 1 0 :1:0 
+[s S365 . 1 `uc 1 ABDEN 1 0 :1:0 
 `uc 1 WUE 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 BRG16 1 0 :1:3 
@@ -313,8 +313,8 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 ABDOVF 1 0 :1:7 
 ]
 "3352
-[u S375 . 1 `S366 1 . 1 0 ]
-[v _BAUDCTLbits BAUDCTLbits `VES375  1 e 1 @391 ]
+[u S374 . 1 `S365 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES374  1 e 1 @391 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "4457
@@ -335,22 +335,20 @@ SPI_ACTIVE_2_IDLE 64
 [v _lmm lmm `uc  1 e 1 0 ]
 "55
 [v _count count `uc  1 e 1 0 ]
-"56
-[v _s s `[20]uc  1 e 20 0 ]
 "57
-[v _l l `[20]uc  1 e 20 0 ]
+[v _s s `[20]uc  1 e 20 0 ]
 "58
+[v _l l `[20]uc  1 e 20 0 ]
+"59
 [v _c c `[20]uc  1 e 20 0 ]
-"60
-[v _x x `f  1 e 4 0 ]
 "61
-[v _p p `f  1 e 4 0 ]
+[v _x x `f  1 e 4 0 ]
 "62
-[v _n n `f  1 e 4 0 ]
-"102
+[v _p p `f  1 e 4 0 ]
+"88
 [v _main main `(v  1 e 1 0 ]
 {
-"186
+"166
 } 0
 "24 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\UART.c
 [v _write write `(v  1 e 1 0 ]
@@ -365,9 +363,9 @@ SPI_ACTIVE_2_IDLE 64
 [v sprintf@fval fval `d  1 a 4 31 ]
 "545
 [v sprintf@val val `ul  1 a 4 25 ]
-[u S711 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
+[u S710 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
 "543
-[v sprintf@tmpval tmpval `S711  1 a 4 21 ]
+[v sprintf@tmpval tmpval `S710  1 a 4 21 ]
 "517
 [v sprintf@prec prec `i  1 a 2 35 ]
 "534
@@ -461,17 +459,17 @@ SPI_ACTIVE_2_IDLE 64
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S909 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S908 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S914 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S917 . 4 `l 1 i 4 0 `d 1 f 4 0 `S909 1 fAsBytes 4 0 `S914 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S917  1 a 4 24 ]
+[s S913 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S916 . 4 `l 1 i 4 0 `d 1 f 4 0 `S908 1 fAsBytes 4 0 `S913 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S916  1 a 4 24 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 18 ]
-[s S986 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S985 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S989 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S986 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S989  1 a 2 28 ]
+[u S988 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S985 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S988  1 a 2 28 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 23 ]
 "11
@@ -645,10 +643,10 @@ SPI_ACTIVE_2_IDLE 64
 [v spiInit@sType sType `E1264  1 a 1 3 ]
 "27
 } 0
-"72 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
+"73 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\main.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"85
+"86
 } 0
 "67 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Master.X\LCD.c
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
