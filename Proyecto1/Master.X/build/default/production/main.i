@@ -2825,16 +2825,20 @@ uint8_t banderaADC = 1;
 uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1;
-uint8_t lmm=0;
-uint8_t count=0;
+uint8_t lmm = 0;
+uint8_t count;
 char s[20];
 char l[20];
 char c[20];
+unsigned char CC;
 float x;
 float p;
 float n;
 
 
+
+
+void __attribute__((picinterrupt(("")))) ISR(void);
 
 
 
@@ -2853,33 +2857,45 @@ void setup(void) {
     PORTAbits.RA1 = 1;
 
 }
-
+# 102 "main.c"
 void main(void) {
 
-
     setup();
-
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    INIT_UART();
 
     Lcd_Init();
     Lcd_Clear();
 
-    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+
     while (1) {
 
 
 
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String("S1:   S2:    S3:");
+        Lcd_Write_String("S1:   S2:    S3: \n");
+        write("S1:");
+        write(s);
+        write("S2:");
+        write(c);
+        write("S3:");
+        write(l);
+        write(0xA);
         x = adc * 0.0195;
         Lcd_Set_Cursor(2, 1);
         sprintf(s, "%3.2fV", x);
         Lcd_Write_String(s);
 
 
-        n = 1*count;
+
+
+
+
+        n = 1 * count;
         Lcd_Set_Cursor(2, 8);
         sprintf(c, "%d", count);
         Lcd_Write_String(c);
+
 
 
         p = 1.95 * lmm;
@@ -2887,6 +2903,7 @@ void main(void) {
         Lcd_Set_Cursor(2, 13);
         sprintf(l, "%3.0fC", p);
         Lcd_Write_String(l);
+
 
 
 
@@ -2906,7 +2923,7 @@ void main(void) {
         _delay((unsigned long)((10)*(8000000/4000.0)));
         PORTCbits.RC1 = 0;
         _delay((unsigned long)((10)*(8000000/4000.0)));
-        SSPBUF = 0;
+        SSPBUF = PORTD;
         count = spiRead();
         _delay((unsigned long)((1)*(8000000/4000.0)));
         PORTCbits.RC1 = 1;

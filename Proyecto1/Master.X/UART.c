@@ -8,7 +8,7 @@
 #include <xc.h>
 #define _XTAL_FREQ 8000000
 void INIT_UART (void) {
-    TRISC = 0b10000000;
+    TRISCbits.TRISC7=1 ;
     TXSTAbits.SYNC = 0;
     RCSTAbits.SPEN = 1;
     PIE1bits.RCIE = 1; //Habilitar interrupción del receptor

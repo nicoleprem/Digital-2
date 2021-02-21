@@ -51,16 +51,20 @@ uint8_t banderaADC = 1; //bandera del ADC
 uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1; //variable para leer al esclavo 1
-uint8_t lmm=0;
-uint8_t count=0;
+uint8_t lmm = 0;
+uint8_t count;
 char s[20];
 char l[20];
 char c[20];
+unsigned char CC;
 float x;
 float p;
 float n;
 
-
+//*****************************************************************************
+//Prototipo de funciones
+//*****************************************************************************
+void __interrupt() ISR(void);
 //*****************************************************************************
 //Declaración de entradas, salidas y limpieza de puertos
 //*****************************************************************************
@@ -79,40 +83,68 @@ void setup(void) {
     PORTAbits.RA1 = 1;
 
 }
+//*****************************************************************************
+//Interrupciones
+//*****************************************************************************
+
+//void __interrupt() ISR(void) {
+//    //Interrupción UART - Recepción
+//    if (PIR1bits.RCIF == 1) {
+//        if (RCSTAbits.OERR == 1) { //Verificar si fue un error
+//            RCSTAbits.CREN = 0;
+//            __delay_us(200);
+//        } else {
+//            mensaje = RCREG; //Se carga el + o el -
+//        }
+//    }
+//}
 
 void main(void) {
-
     //    unsigned int a;
     setup();
-    //    INIT_UART();
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    INIT_UART();
     //    read();
     Lcd_Init();
     Lcd_Clear();
     //    PORTCbits.RC0 = 1;
-    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    
     while (1) {
 
         //Comienzo de la impresión de S1 y S2
         //Lcd_Clear();       
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String("S1:   S2:    S3:"); //Primera fila
+        Lcd_Write_String("S1:   S2:    S3: \n"); //Primera fila
+        write("S1:");
+        write(s);
+        write("S2:");
+        write(c);
+        write("S3:");
+        write(l);
+        write(0xA);
         x = adc * 0.0195; //ADC
         Lcd_Set_Cursor(2, 1); //Posición S1
         sprintf(s, "%3.2fV", x); //Valor S1
         Lcd_Write_String(s);
-        
+//        write(s);
+//        write(c);
+//        write(l);
+//        write("\n");
+
         //Contador
-        n = 1*count;
+        n = 1 * count;
         Lcd_Set_Cursor(2, 8);
         sprintf(c, "%d", count);
         Lcd_Write_String(c);
-        
+//        mensaje = c;
+
         //Temperatura
         p = 1.95 * lmm;
         //Lcd_Clear();
         Lcd_Set_Cursor(2, 13); //Posición S1
         sprintf(l, "%3.0fC", p); //Valor S1
         Lcd_Write_String(l);
+//        mensaje = p;
 
 
 
@@ -127,17 +159,17 @@ void main(void) {
         __delay_ms(1);
         PORTCbits.RC0 = 1;
         __delay_ms(200);
-        
+
         //Contador
         __delay_ms(10);
         PORTCbits.RC1 = 0;
         __delay_ms(10);
-        SSPBUF = 0;
+        SSPBUF = PORTD;
         count = spiRead();
         __delay_ms(1);
         PORTCbits.RC1 = 1;
         __delay_ms(200);
-        
+
         //Temperatura
         __delay_ms(10);
         PORTCbits.RC2 = 0;
@@ -147,8 +179,8 @@ void main(void) {
         __delay_ms(1);
         PORTCbits.RC2 = 1;
         __delay_ms(200);
-//        __delay_ms(250);
-       
+        //        __delay_ms(250);
+
     }
 
 }

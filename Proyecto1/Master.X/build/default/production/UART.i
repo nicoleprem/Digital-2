@@ -2498,7 +2498,7 @@ extern __bank0 __bit __timeout;
 
 
 void INIT_UART (void) {
-    TRISC = 0b10000000;
+    TRISCbits.TRISC7=1 ;
     TXSTAbits.SYNC = 0;
     RCSTAbits.SPEN = 1;
     PIE1bits.RCIE = 1;

@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>LM35.h</itemPath>
       <itemPath>SPI.h</itemPath>
+      <itemPath>UART.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
