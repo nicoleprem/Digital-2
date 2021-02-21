@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "SPI.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,15 +6,10 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-
-
-
-
-
-
-
-
+# 1 "SPI.c" 2
+# 11 "SPI.c"
+# 1 "./SPI.h" 1
+# 16 "./SPI.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2495,155 +2490,9 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 9 "main.c" 2
+# 16 "./SPI.h" 2
 
-# 1 "./LM35.h" 1
 
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
-
-
-
-
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 6 "./LM35.h" 2
-
-
-void LM (uint8_t banderaLM);
-# 10 "main.c" 2
-
-# 1 "./SPI.h" 1
-# 18 "./SPI.h"
 typedef enum
 {
     SPI_MASTER_OSC_DIV4 = 0b00100000,
@@ -2677,109 +2526,46 @@ void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
 void spiWrite(char);
 unsigned spiDataReady();
 char spiRead();
-# 11 "main.c" 2
+# 11 "SPI.c" 2
 
 
+void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
+{
+    TRISC5 = 0;
+    if(sType & 0b00000100)
+    {
+        SSPSTAT = sTransmitEdge;
+        TRISC3 = 1;
+    }
+    else
+    {
+        SSPSTAT = sDataSample | sTransmitEdge;
+        TRISC3 = 0;
+    }
 
-
-
-
-
-#pragma config FOSC = INTRC_CLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
-
-
-
-
-
-uint8_t banderaLM;
-uint8_t lmm;
-uint8_t color;
-uint8_t esclavo3;
-uint8_t conversor;
-
-
-
-
-void __attribute__((picinterrupt(("")))) ISR(void);
-void setup(void);
-
-
-
-
-
-void setup(void) {
-    TRISAbits.TRISA5 = 1;
-    TRISD = 0b00000000;
-    TRISB = 0b00000001;
-    PORTB = 0;
-    PORTD = 0;
-    SSPIF = 0;
-    PORTAbits.RA5 = 1;
-    SSPIE = 1;
-    INTCON = 0b11101000;
-
+    SSPCON = sType | sClockIdle;
 }
 
-
-
-
-
-void __attribute__((picinterrupt(("")))) ISR(void) {
-
-    if (PIR1bits.ADIF == 1) {
-        banderaLM = 1;
-        lmm = ADRESH;
-
-        PIR1bits.ADIF = 0;
-    }
-
-    if (PIR1bits.SSPIF == 1 && SSPSTATbits.BF == 1) {
-        esclavo3 = spiRead();
-        spiWrite(lmm);
-        PIR1bits.SSPIF = 0;
-    }
+static void spiReceiveWait()
+{
+    while ( !SSPSTATbits.BF );
 }
 
-void main(void) {
-    setup();
-    banderaLM = 1;
-    esclavo3 = 0;
-    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
-    while (1) {
-        LM(banderaLM);
-        conversor = 1.95 * lmm;
-        if (conversor < 21) {
-            PORTDbits.RD2 = 1;
-            PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 0;
-            _delay((unsigned long)((500)*(8000000/4000.0)));
-        }
-        else if (conversor > 21 && conversor < 36) {
-            PORTDbits.RD2 = 0;
-            PORTDbits.RD1 = 1;
-            PORTDbits.RD0 = 0;
-            _delay((unsigned long)((500)*(8000000/4000.0)));
-        } else if (conversor > 36) {
-            PORTDbits.RD2 = 0;
-            PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 1;
-            _delay((unsigned long)((500)*(8000000/4000.0)));
-        }
+void spiWrite(char dat)
+{
+    SSPBUF = dat;
+}
 
-    }
+unsigned spiDataReady()
+{
+    if(SSPSTATbits.BF)
+        return 1;
+    else
+        return 0;
+}
+
+char spiRead()
+{
+    spiReceiveWait();
+    return(SSPBUF);
 }

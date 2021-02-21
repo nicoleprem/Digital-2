@@ -10,12 +10,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2991
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2991: extern volatile ADCON1bits_t ADCON1bits __attribute__((address(0x09F)));
 [v _ADCON1bits `VS115 ~T0 @X0 0 e@159 ]
-"459
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 459: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
-[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
 "3387
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
+"459
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 459: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
+[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
 "1245
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1245: extern volatile unsigned char ADCON0 __attribute__((address(0x01F)));
 [v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
@@ -316,38 +316,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;LM35.c: 22:     ADCON1bits.ADFM = 0;
 [e = . . _ADCON1bits 0 4 -> -> 0 `i `uc ]
 "23
-[; ;LM35.c: 23:     INTCON = 0b11101000;
+[; ;LM35.c: 23:     ANSEL = 0b0001100;
+[e = _ANSEL -> -> 12 `i `uc ]
+"24
+[; ;LM35.c: 24:     INTCON = 0b11101000;
 [e = _INTCON -> -> 232 `i `uc ]
 "25
-[; ;LM35.c: 25:     ANSEL = 0b00000001;
-[e = _ANSEL -> -> 1 `i `uc ]
-"26
-[; ;LM35.c: 26:     ADCON0 = 0b01000001;
-[e = _ADCON0 -> -> 65 `i `uc ]
-"27
-[; ;LM35.c: 27:     PIE1bits.ADIE = 1;
-[e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
+[; ;LM35.c: 25:     ADCON0 = 0b01110001;
+[e = _ADCON0 -> -> 113 `i `uc ]
 "28
-[; ;LM35.c: 28:     PIR1bits.ADIF = 0;
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;LM35.c: 28:     PIE1bits.ADIE = 1;
+[e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
 "29
-[; ;LM35.c: 29:     if (banderaLM == 1){
+[; ;LM35.c: 29:     PIR1bits.ADIF = 0;
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"30
+[; ;LM35.c: 30:     if (banderaLM == 1) {
 [e $ ! == -> _banderaLM `i -> 1 `i 139  ]
 {
-"30
-[; ;LM35.c: 30:         _delay((unsigned long)((20)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "31
-[; ;LM35.c: 31:         ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;LM35.c: 31:         _delay((unsigned long)((20)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "32
-[; ;LM35.c: 32:         banderaLM = 0;
+[; ;LM35.c: 32:         ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"33
+[; ;LM35.c: 33:         banderaLM = 0;
 [e = _banderaLM -> -> 0 `i `uc ]
-"34
-[; ;LM35.c: 34:     }
+"36
+[; ;LM35.c: 36:     }
 }
 [e :U 139 ]
-"35
-[; ;LM35.c: 35: }
+"40
+[; ;LM35.c: 40: }
 [e :UE 138 ]
 }

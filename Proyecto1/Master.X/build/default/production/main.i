@@ -2825,8 +2825,10 @@ uint8_t banderaADC = 1;
 uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1;
+uint8_t lmm=0;
 char s[20];
 float x;
+float p;
 
 
 
@@ -2868,6 +2870,20 @@ void main(void) {
         sprintf(s, "%3.2fV", x);
         Lcd_Write_String(s);
 
+
+
+
+        p = 1.95 * lmm;
+
+        Lcd_Set_Cursor(2, 9);
+        sprintf(s, "%3.0fC", p);
+        Lcd_Write_String(s);
+
+
+
+
+
+
         _delay((unsigned long)((1)*(8000000/4000.0)));
         PORTCbits.RC0 = 0;
         _delay((unsigned long)((1)*(8000000/4000.0)));
@@ -2876,6 +2892,20 @@ void main(void) {
         _delay((unsigned long)((1)*(8000000/4000.0)));
         PORTCbits.RC0 = 1;
         _delay((unsigned long)((200)*(8000000/4000.0)));
+
+
+
+
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+        PORTCbits.RC2 = 0;
+        _delay((unsigned long)((10)*(8000000/4000.0)));
+        SSPBUF = 0;
+
+        lmm = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC2 = 1;
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
 
     }
 

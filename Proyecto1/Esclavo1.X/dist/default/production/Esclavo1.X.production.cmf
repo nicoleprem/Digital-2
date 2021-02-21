@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\User\AppData\Local\Temp\sg4c.o
+$C:\Users\User\AppData\Local\Temp\s9rg.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -77,13 +77,13 @@ STRING CA-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Esclavo1.X.production.o
-F cinit CODE >799:C:\Users\User\AppData\Local\Temp\sg4c.s
-F cinit CODE >802:C:\Users\User\AppData\Local\Temp\sg4c.s
-F cinit CODE >816:C:\Users\User\AppData\Local\Temp\sg4c.s
-10 cinit CODE >817:C:\Users\User\AppData\Local\Temp\sg4c.s
-11 cinit CODE >823:C:\Users\User\AppData\Local\Temp\sg4c.s
-11 cinit CODE >825:C:\Users\User\AppData\Local\Temp\sg4c.s
-12 cinit CODE >826:C:\Users\User\AppData\Local\Temp\sg4c.s
+F cinit CODE >799:C:\Users\User\AppData\Local\Temp\s9rg.s
+F cinit CODE >802:C:\Users\User\AppData\Local\Temp\s9rg.s
+F cinit CODE >816:C:\Users\User\AppData\Local\Temp\s9rg.s
+10 cinit CODE >817:C:\Users\User\AppData\Local\Temp\s9rg.s
+11 cinit CODE >823:C:\Users\User\AppData\Local\Temp\s9rg.s
+11 cinit CODE >825:C:\Users\User\AppData\Local\Temp\s9rg.s
+12 cinit CODE >826:C:\Users\User\AppData\Local\Temp\s9rg.s
 4 intentry CODE >70:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo1.X\main.c
 BD text7 CODE >30:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo1.X\SPI.c
 BD text7 CODE >32:C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto1\Esclavo1.X\SPI.c
@@ -169,21 +169,21 @@ spiInit@sTransmitEdge 76 0 COMMON 1 cstackCOMMON dist/default/production\Esclavo
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _AADC 8C 0 CODE 0 text3 dist/default/production\Esclavo1.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\sg4c.o
+___sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s9rg.o
 _main 10A 0 CODE 0 maintext dist/default/production\Esclavo1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-start 18 0 CODE 0 init C:\Users\User\AppData\Local\Temp\sg4c.o
+start 18 0 CODE 0 init C:\Users\User\AppData\Local\Temp\s9rg.o
 __size_of_AADC 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __LnvCOMMON 0 0 ABS 0 nvCOMMON -
-intlevel0 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\sg4c.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\User\AppData\Local\Temp\s9rg.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -194,8 +194,8 @@ __size_of_spiInit 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __size_of_spiRead 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 _INTCON B 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\sg4c.o
-___stacklo 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\sg4c.o
+___stackhi 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s9rg.o
+___stacklo 0 0 ABS 0 - C:\Users\User\AppData\Local\Temp\s9rg.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __HnvCOMMON 0 0 ABS 0 nvCOMMON -
 spiInit@sDataSample 74 0 COMMON 1 cstackCOMMON dist/default/production\Esclavo1.X.production.o
@@ -206,7 +206,7 @@ _SSPBUF 13 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 _TRISC5 43D 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\sg4c.o
+___int_sp 0 0 STACK 2 stack C:\Users\User\AppData\Local\Temp\s9rg.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -255,7 +255,7 @@ saved_w 7E 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __end_of_ISR 8C 0 CODE 0 text4 dist/default/production\Esclavo1.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
 AADC@banderaADC 75 0 COMMON 1 cstackCOMMON dist/default/production\Esclavo1.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\User\AppData\Local\Temp\sg4c.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\User\AppData\Local\Temp\s9rg.o
 _PIE1bits 8C 0 ABS 0 - dist/default/production\Esclavo1.X.production.o
 __pmaintext 10A 0 CODE 0 maintext dist/default/production\Esclavo1.X.production.o
 _banderaADC 79 0 COMMON 1 nvCOMMON dist/default/production\Esclavo1.X.production.o

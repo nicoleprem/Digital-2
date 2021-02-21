@@ -51,8 +51,10 @@ uint8_t banderaADC = 1; //bandera del ADC
 uint8_t adc;
 uint8_t mensaje;
 uint8_t esclavo1; //variable para leer al esclavo 1
+uint8_t lmm=0;
 char s[20];
 float x;
+float p;
 
 
 //*****************************************************************************
@@ -89,11 +91,25 @@ void main(void) {
         //Lcd_Clear();       
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String("S1:   S2:    S3:"); //Primera fila
-        x = adc * 0.0195;
+        x = adc * 0.0195; //ADC
         Lcd_Set_Cursor(2, 1); //Posición S1
         sprintf(s, "%3.2fV", x); //Valor S1
         Lcd_Write_String(s);
+        //Contador
 
+
+        //Temperatura
+        p = 1.95 * lmm;
+        //Lcd_Clear();
+        Lcd_Set_Cursor(2, 9); //Posición S1
+        sprintf(s, "%3.0fC", p); //Valor S1
+        Lcd_Write_String(s);
+
+
+
+
+
+        //ADC
         __delay_ms(1);
         PORTCbits.RC0 = 0;
         __delay_ms(1);
@@ -102,10 +118,21 @@ void main(void) {
         __delay_ms(1);
         PORTCbits.RC0 = 1;
         __delay_ms(200);
+        
+        //Contador
+        
+        //Temperatura
+        __delay_ms(10);
+        PORTCbits.RC2 = 0;
+        __delay_ms(10);
+        SSPBUF = 0;
 
+        lmm = spiRead();
+        __delay_ms(1);
+        PORTCbits.RC2 = 1;
+        __delay_ms(200);
+//        __delay_ms(250);
+       
     }
 
 }
-
-
-

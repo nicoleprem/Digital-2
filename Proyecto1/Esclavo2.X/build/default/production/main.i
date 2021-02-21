@@ -7,12 +7,21 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
+# 13 "main.c"
+#pragma config FOSC = INTRC_CLKOUT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config MCLRE = OFF
+#pragma config CP = OFF
+#pragma config CPD = OFF
+#pragma config BOREN = OFF
+#pragma config IESO = OFF
+#pragma config FCMEN = OFF
+#pragma config LVP = OFF
 
 
-
-
-
-
+#pragma config BOR4V = BOR40V
+#pragma config WRT = OFF
 
 
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
@@ -2495,7 +2504,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 9 "main.c" 2
+# 28 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2630,7 +2639,44 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 10 "main.c" 2
+# 29 "main.c" 2
+
+# 1 "./SPI.h" 1
+# 18 "./SPI.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+# 30 "main.c" 2
 
 
 
@@ -2640,44 +2686,84 @@ typedef uint16_t uintptr_t;
 
 
 uint8_t count;
+uint8_t flag;
+uint8_t esclavo2;
 
 
 
-void setup (void){
-    TRISB = 0x03;
+
+void setup(void);
+void __attribute__((picinterrupt(("")))) ISR(void);
+
+
+
+
+void setup(void) {
+    TRISAbits.TRISA5 = 1;
+    TRISB = 0b11000011;
     INTCON = 0xE8;
 
 
-    TRISD = 0;
+    TRISD = 0b00000000;
+    TRISC = 0b00011000;
 
     PORTB = 0;
     PORTD = 0;
 
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
+    IOCBbits.IOCB6 = 1;
+    IOCBbits.IOCB7 = 1;
+    flag = 0;
+    SSPIF = 0;
+    PORTAbits.RA5 = 1;
+    SSPIE = 1;
 }
+
 
 
 
 void __attribute__((picinterrupt(("")))) ISR(void) {
 
     if (INTCONbits.RBIF == 1) {
-        if (PORTBbits.RB0 == 0) {
+        if (PORTBbits.RB6 == 0) {
+            while (flag == 0) {
+                if (PORTBbits.RB6 == 1) {
+                    flag = 1;
+                }
+            }
+            flag = 0;
             count++;
-        } else if (PORTBbits.RB1 == 0) {
+
+        } else if (PORTBbits.RB7 == 0) {
+            while (flag == 0) {
+                if (PORTBbits.RB7 == 1) {
+                    flag = 1;
+                }
+            }
+            flag = 0;
             count--;
+
         }
-        INTCONbits.RBIF = 0;
+
+
+        if (PIR1bits.SSPIF == 1){
+            esclavo2 = spiRead();
+            spiWrite(count);
+            PIR1bits.SSPIF = 0;
+        }
+    }
+    INTCONbits.RBIF = 0;
+}
+
+
+
+void main(void) {
+    setup();
+    count = 0;
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    while (1) {
+
+        PORTD = count;
+
     }
 
-}
-void main(void) {
-        while (1) {
-
-            setup();
-            count = 0;
-            while (1) {
-                PORTD = count;
-            }
-        }
 }

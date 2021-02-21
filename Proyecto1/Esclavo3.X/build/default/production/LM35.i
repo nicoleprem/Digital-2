@@ -2644,16 +2644,21 @@ uint8_t banderaLM;
 
 void LM (uint8_t banderaLM) {
     ADCON1bits.ADFM = 0;
+    ANSEL = 0b0001100;
     INTCON = 0b11101000;
+    ADCON0 = 0b01110001;
 
-    ANSEL = 0b00000001;
-    ADCON0 = 0b01000001;
+
     PIE1bits.ADIE = 1;
     PIR1bits.ADIF = 0;
-    if (banderaLM == 1){
+    if (banderaLM == 1) {
         _delay((unsigned long)((20)*(8000000/4000000.0)));
         ADCON0bits.GO = 1;
         banderaLM = 0;
 
+
     }
+
+
+
 }

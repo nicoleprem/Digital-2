@@ -8,6 +8,7 @@
 
 #include <xc.h>
 #include "LM35.h"
+#include "SPI.h"
 #define _XTAL_FREQ 8000000
 //*****************************************************************************
 //Configuración de la palabra
@@ -38,63 +39,78 @@
 uint8_t banderaLM;
 uint8_t lmm;
 uint8_t color; //variable para almacenar el valor del voltaje y devolver color
-double conversor;
+uint8_t esclavo3;
+uint8_t conversor;
+
+
+//*****************************************************************************
+//Prototipos de funciones
+//*****************************************************************************
+void __interrupt() ISR(void);
+void setup(void);
 
 //*****************************************************************************
 //Declaración de entradas, salidas y limpieza de puertos
 //*****************************************************************************
-void setup (void){
-    ANSEL = 0x01; //Entrada analógica
-    ANSELH = 0; //Entrada analógica
-    INTCON = 0xE8; /*Activación de Global Interrupt Enable, Peripherial
-                          Interrupt E.,,Timer0 Overflow Interrupt E.,
-                          PortB interrupt on change*/
-     //bits de interrupciones
-    IOCBbits.IOCB0 = 1;
-    IOCBbits.IOCB1 = 1;
-    PORTEbits.RE0 = 1;
-    
+
+void setup(void) {
+    TRISAbits.TRISA5 = 1;
+    TRISD = 0b00000000;
+    TRISB = 0b00000001;
+    PORTB = 0;
+    PORTD = 0;
+    SSPIF = 0;
+    PORTAbits.RA5 = 1;
+    SSPIE = 1;
+    INTCON = 0b11101000; //se configuran las interrupciones GIE, PIE, T0IE y RBIE
+
 }
 
 //*****************************************************************************
 //Interrupciones
 //*****************************************************************************
-    
+
 void __interrupt() ISR(void) {
     //Interrupcuón del ADC
     if (PIR1bits.ADIF == 1) {
         banderaLM = 1;
-        //valorI = ADRESH >> 4; //corrimiento para desplegar valor izquierda
-        //valorD = ADRESH & 0b00001111; //escoger bits para valor derecha
         lmm = ADRESH;
+        //PORTD = lmm;
         PIR1bits.ADIF = 0; //Se apaga bandera ADC
+    }
+    //Interrupción del SPI
+    if (PIR1bits.SSPIF == 1 && SSPSTATbits.BF == 1) {
+        esclavo3 = spiRead();
+        spiWrite(lmm);
+        PIR1bits.SSPIF = 0;
     }
 }
 
 void main(void) {
-   setup();
+    setup();
     banderaLM = 1;
+    esclavo3 = 0;
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     while (1) {
         LM(banderaLM);
-        conversor = 1.95*lmm;
-        if (conversor < 21 ){
+        conversor = 1.95 * lmm;
+        if (conversor < 21) {
             PORTDbits.RD2 = 1; //encender color verde
             PORTDbits.RD1 = 0;
-            PORTDbits.RD0 = 0; 
-             __delay_ms(500);            
-        } 
-        else if (conversor > 21 && conversor <36){
+            PORTDbits.RD0 = 0;
+            __delay_ms(500);
+        }
+        else if (conversor > 21 && conversor < 36) {
             PORTDbits.RD2 = 0;
             PORTDbits.RD1 = 1; //encender color amarillo
             PORTDbits.RD0 = 0;
-             __delay_ms(500);   
-        }
-        else if (conversor > 36){
+            __delay_ms(500);
+        } else if (conversor > 36) {
             PORTDbits.RD2 = 0;
             PORTDbits.RD1 = 0;
             PORTDbits.RD0 = 1; //encender color verde
-             __delay_ms(500);   
+            __delay_ms(500);
         }
-            
-}
+
+    }
 }
