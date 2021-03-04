@@ -4,6 +4,12 @@
  *
  * Created on 3 de marzo de 2021, 10:13 AM
  */
+
+#include <xc.h>
+#include <stdint.h>
+#include "I2C.h"
+#include "LM75.h"
+#define _XTAL_FREQ 4000000
 //******************************************************************************
 //Configuración de la palabra
 //******************************************************************************
@@ -26,11 +32,6 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
-#include <xc.h>
-#include <stdint.h>
-#include "I2C.h"
-#include "LM75.h"
-#define _XTAL_FREQ 4000000
 
 void setup (void);
 void setup(void){

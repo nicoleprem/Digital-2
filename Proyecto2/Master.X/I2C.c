@@ -1,80 +1,106 @@
-
-#define _XTAL_FREQ 4000000
-
-#include <xc.h> // include processor files - each processor file is guarded.  
+/*
+ * File            : I2C.c
+ * Author          : Ligo George
+ * Company         : electroSome
+ * Project         : I2C Library for MPLAB XC8
+ * Microcontroller : PIC 16F877A
+ * Created on April 15, 2017, 5:59 PM
+ * Link: https://electrosome.com/i2c-pic-microcontroller-mplab-xc8/
+ * Modificada por: Pablo Mazariegos con la ayuda del auxiliar Gustavo Ordoñez 
+ * Basado en Link: http://microcontroladores-mrelberni.com/i2c-pic-comunicacion-serial/
+ */
 #include "I2C.h"
-#include <stdint.h>
-//---------------------------DIRECTION------------------------------------------
-#define SCK_dir TRISCbits.TRISC3			//Clock pin direction
-#define SDA_dir TRISCbits.TRISC4			//Data pin direction
-
-//--------------Function Purpose: Configure I2C module--------------------------
-void I2C_init(unsigned char speed)
+//*****************************************************************************
+// Función para inicializar I2C Maestro
+//*****************************************************************************
+void I2C_Master_Init(const unsigned long c)
 {
-  SCK_dir = 1;		// SCK pins input
-  SDA_dir = 1;		// Make SDA and 
-
-  SSPADD  = ((_XTAL_FREQ/4000)/speed) - 1;
-  SSPSTAT = 0x80;		// Slew Rate control is disabled 0x80=10000000
-  SSPCON  = 0x28;		// Select and enable I2C in master mode 0x28=00101000
+    SSPCON = 0b00101000;
+    SSPCON2 = 0;
+    SSPADD = (_XTAL_FREQ/(4*c))-1;
+    SSPSTAT = 0;
+    TRISCbits.TRISC3 = 1;
+    TRISCbits.TRISC4 = 1;
 }
-//---------------Function Purpose: I2C_Start sends start bit sequence-----------
-void I2C_start(void)
+//*****************************************************************************
+// Función de espera: mientras se esté iniciada una comunicación,
+// esté habilitado una recepción, esté habilitado una parada
+// esté habilitado un reinicio de la comunicación, esté iniciada
+// una comunicación o se este transmitiendo, el IC2 PIC se esperará
+// antes de realizar algún trabajo
+//*****************************************************************************
+void I2C_Master_Wait()
 {
-  SSPCON2 = 00000001;			// Send start bit, SSPCON2 = 00000001
-  while(!PIR1bits.SSPIF);		// Wait for it to complete sspif=pir1
-  PIR1bits.SSPIF = 0;			// Clear the flag bit
+    while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 }
-//---------------Function Purpose: I2C_ReStart sends start bit sequence---------
-void I2C_restart(void) //No la usan en presentación
+//*****************************************************************************
+// Función de inicio de la comunicación I2C PIC
+//*****************************************************************************
+void I2C_Master_Start()
 {
-  SSPCON2bits.RSEN = 1;			// Send Restart bit en SDA y SCL pins
-  while(!PIR1bits.SSPIF);		// Wait for it to complete sspif=pir1
-  PIR1bits.SSPIF = 0;			// Clear the flag bit
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    SSPCON2bits.SEN = 1;    //inicia la comunicación i2c
 }
-//---------------Function : I2C_Stop sends stop bit sequence--------------------
-void I2C_stop(void)
+//*****************************************************************************
+// Función de reinicio de la comunicación I2C PIC
+//*****************************************************************************
+void I2C_Master_RepeatedStart()
 {
-  SSPCON2bits.PEN = 1;			// Send stop bit, SSPCON2=00000100
-  while(!PIR1bits.SSPIF);		// Wait for it to complete
-  PIR1bits.SSPIF = 0;			// Clear the flag bit
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    SSPCON2bits.RSEN = 1;   //reinicia la comunicación i2c
 }
-//---------------Function : Send ACK/NACK bit sequence--------------------------
-void I2C_ack(char acknowledge)
+//*****************************************************************************
+// Función de parada de la comunicación I2C PIC
+//*****************************************************************************
+void I2C_Master_Stop()
 {
-  SSPCON2bits.ACKDT = acknowledge;	        // 0 means ACK, 1 means NACK
-  SSPCON2bits.ACKEN = 1;			// Send ACKDT value
-  while(!PIR1bits.SSPIF);		// Wait for it to complete
-  PIR1bits.SSPIF = 0;			// Clear the flag bit
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    SSPCON2bits.PEN = 1;    //detener la comunicación i2c
 }
-//---------------Function Purpose: I2C_Write_Byte transfers one byte------------
-unsigned char I2C_write(unsigned char data)
+//*****************************************************************************
+//Función de transmisión de datos del maestro al esclavo
+//esta función devolverá un 0 si el esclavo a recibido
+//el dato
+//*****************************************************************************
+void I2C_Master_Write(unsigned d)
 {
-  SSPBUF = data;		// Send Byte value
-  while(!PIR1bits.SSPIF);		// Wait for it to complete
-  PIR1bits.SSPIF = 0;			// Clear the flag bit
-
-  return SSPCON2bits.ACKSTAT;		// Return ACK/NACK from slave
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    SSPBUF = d;             
 }
-//----------------Function Purpose: I2C_Read_Byte reads one byte----------------
-unsigned char I2C_read(char acknowledge)
+//*****************************************************************************
+//Función de recepción de datos enviados por el esclavo al maestro
+//esta función es para leer los datos que están en el esclavo
+//*****************************************************************************
+unsigned short I2C_Master_Read(unsigned short a)
 {
-   SSPCON2bits.RCEN = 1;			// Enable reception of 8 bits sspcon2=00010000 enables receive mode
-   while(!PIR1bits.SSPIF);		// Wait for it to complete
-   PIR1bits.SSPIF = 0;			// Clear the flag bit
-   I2C_ack(acknowledge);
-
-   return SSPBUF;		// Return received byte
+    unsigned short temp;
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    SSPCON2bits.RCEN = 1;
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    temp = SSPBUF;
+    I2C_Master_Wait();      //espera que se cumplan las condiciones adecuadas
+    if(a == 1){
+        SSPCON2bits.ACKDT = 0;
+    }else{
+        SSPCON2bits.ACKDT = 1;
+    }
+    SSPCON2bits.ACKEN = 1;          // Iniciar sequencia de Acknowledge
+    return temp;                    // Regresar valor del dato leído
 }
-//------------------------------------------------------------------------------
-/*OR R/nW bit with SEN, RSEN, PEN, RCEN or ACKEN will indicate if the MSSP is in
- * Idle mode*/
-//char I2C_busy()
-//{
-//  char isBusy = (SSPCON2  & 0x1F) | R_W;
-//
-//  return isBusy;
-//}
-
-
-
+//*****************************************************************************
+// Función para inicializar I2C Esclavo
+//*****************************************************************************
+void I2C_Slave_Init(uint8_t address)
+{ 
+    SSPADD = address;
+    SSPCON = 0x36;      // 0b00110110
+    SSPSTAT = 0x80;     // 0b10000000
+    SSPCON2 = 0x01;     // 0b00000001
+    TRISC3 = 1;
+    TRISC4 = 1;
+    GIE = 1;
+    PEIE = 1;
+    SSPIF = 0;
+    SSPIE = 1;
+}
+//*****************************************************************************

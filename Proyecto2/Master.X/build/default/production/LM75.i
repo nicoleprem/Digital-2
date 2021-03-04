@@ -2503,6 +2503,8 @@ extern __bank0 __bit __timeout;
 
 
 
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2636,8 +2638,11 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 6 "./LM75.h" 2
-# 15 "./LM75.h"
+# 8 "./LM75.h" 2
+
+
+
+
 void LM75_init(void);
 float LM75_read(char regAddress);
 void LM75_setConfig(char data);
@@ -2647,33 +2652,52 @@ float toFloat(signed int tempr);
 # 10 "LM75.c" 2
 
 # 1 "./I2C.h" 1
-# 14 "./I2C.h"
-char ACK = 0;
-char NACK = 1;
+# 22 "./I2C.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 22 "./I2C.h" 2
+# 31 "./I2C.h"
+void I2C_Master_Init(const unsigned long c);
 
 
 
-void I2C_init(uint8_t speed);
 
-void I2C_start(void);
 
-void I2C_restart(void);
 
-void I2C_stop(void);
 
-void I2C_ack(char acknowledge);
+void I2C_Master_Wait(void);
 
-unsigned char I2C_write(unsigned char data);
 
-unsigned char I2C_read(char acknowledge);
 
-char I2C_busy(void);
+void I2C_Master_Start(void);
+
+
+
+void I2C_Master_RepeatedStart(void);
+
+
+
+void I2C_Master_Stop(void);
+
+
+
+
+
+void I2C_Master_Write(unsigned d);
+
+
+
+
+unsigned short I2C_Master_Read(unsigned short a);
+
+
+
+void I2C_Slave_Init(uint8_t address);
 # 11 "LM75.c" 2
 
 
 void LM75_init()
 {
-  I2C_init(100000);
+  I2C_Master_Init(100000);
 
 
 
@@ -2684,42 +2708,30 @@ float LM75_read(char regAddress)
 {
   signed int MSB,LSB;
 
-  I2C_start();
 
-  I2C_write(0x90 + 0);
-  I2C_write(regAddress);
-  I2C_restart();
-  I2C_write(0x90 + 1);
-  MSB = I2C_read(ACK);
-  LSB = I2C_read(NACK);
+  I2C_Master_Start();
 
-  I2C_stop();
+  I2C_Master_Write(0b10010000);
+  I2C_Master_Write(regAddress);
+
+  I2C_Master_Write(0b10010001);
+  MSB = I2C_Master_Read(1);
+  LSB = I2C_Master_Read(0);
+
+  I2C_Master_Stop();
+  _delay((unsigned long)((200)*(4000000/4000.0)));
 
   return toFloat((MSB << 8) + LSB);
+
 }
 
 void LM75_setConfig(char data)
 {
-  I2C_start();
+  I2C_Master_Start();
 
-  I2C_write(0x90);
-  I2C_write(0x01);
-  I2C_write(data);
+  I2C_Master_Write(0x90);
+  I2C_Master_Write(0x01);
+  I2C_Master_Write(data);
 
-  I2C_stop();
-}
-
-char LM75_readConfig()
-{
-  I2C_start();
-
-  I2C_write(0x90 + 0);
-  I2C_write(0x01);
-  I2C_restart();
-  I2C_write(0x90 + 1);
-  char config = I2C_read(NACK);
-
-  I2C_stop();
-
-  return config;
+  I2C_Master_Stop();
 }
