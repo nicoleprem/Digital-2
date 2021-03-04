@@ -25,8 +25,6 @@
 [v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
 "65
 [v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
-"74
-[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
 "13 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto2\Master.X\LM75.c
 [v _LM75_init LM75_init `(v  1 e 1 0 ]
 "22
@@ -99,23 +97,19 @@
 [v ___fltol __fltol `(l  1 e 4 0 ]
 {
 "45
-[v ___fltol@exp1 exp1 `uc  1 a 1 15 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 14 ]
+[v ___fltol@exp1 exp1 `uc  1 a 1 6 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 5 ]
 "43
-[v ___fltol@f1 f1 `d  1 p 4 5 ]
+[v ___fltol@f1 f1 `d  1 p 4 10 ]
 "70
 } 0
 "22 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto2\Master.X\LM75.c
 [v _LM75_read LM75_read `(f  1 e 4 0 ]
 {
 [v LM75_read@regAddress regAddress `uc  1 a 1 wreg ]
-"24
-[v LM75_read@LSB LSB `i  1 a 2 2 ]
-[v LM75_read@MSB MSB `i  1 a 2 0 ]
-"22
 [v LM75_read@regAddress regAddress `uc  1 a 1 wreg ]
 "27
-[v LM75_read@regAddress regAddress `uc  1 a 1 4 ]
+[v LM75_read@regAddress regAddress `uc  1 a 1 9 ]
 "41
 } 0
 "65 C:\Users\User\Documents\AA Nicole UVG\4to año\Digital 2\Digital-2\Proyecto2\Master.X\I2C.c
@@ -133,15 +127,6 @@
 [v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
 {
 "43
-} 0
-"74
-[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
-{
-"76
-[v I2C_Master_Read@temp temp `us  1 a 2 4 ]
-"74
-[v I2C_Master_Read@a a `us  1 p 2 0 ]
-"89
 } 0
 "32
 [v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]

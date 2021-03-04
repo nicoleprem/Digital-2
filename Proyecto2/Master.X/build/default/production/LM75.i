@@ -2706,7 +2706,7 @@ void LM75_init()
 
 float LM75_read(char regAddress)
 {
-  signed int MSB,LSB;
+
 
 
   I2C_Master_Start();
@@ -2715,13 +2715,13 @@ float LM75_read(char regAddress)
   I2C_Master_Write(regAddress);
 
   I2C_Master_Write(0b10010001);
-  MSB = I2C_Master_Read(1);
-  LSB = I2C_Master_Read(0);
+
+
 
   I2C_Master_Stop();
   _delay((unsigned long)((200)*(4000000/4000.0)));
 
-  return toFloat((MSB << 8) + LSB);
+
 
 }
 

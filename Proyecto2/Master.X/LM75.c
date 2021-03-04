@@ -21,22 +21,22 @@ void LM75_init()
 //------------------------------------------------------------------------------
 float LM75_read(char regAddress)
 {
-  signed int MSB,LSB;
+//  signed int MSB,LSB;
   
   
   I2C_Master_Start();
   
-  I2C_Master_Write(0b10010000);        //0x90=1001000 0 = Write             
+  I2C_Master_Write(0b10010000);        //1001000 + 0 = Write             
   I2C_Master_Write(regAddress);        
   //I2C_restart();                           
-  I2C_Master_Write(0b10010001);        // 1 = Read   
-  MSB = I2C_Master_Read(1); //ack
-  LSB = I2C_Master_Read(0); //nack
+  I2C_Master_Write(0b10010001);        //1001000 + 1 = Read   
+//  MSB = I2C_Master_Read(1); //ack
+//  LSB = I2C_Master_Read(0); //nack
   
   I2C_Master_Stop();
   __delay_ms(200);
   
-  return toFloat((MSB << 8) + LSB);
+//  return toFloat((MSB << 8) + LSB);
   //__delay_ms(200);
 }
 //------------------------------------------------------------------------------
