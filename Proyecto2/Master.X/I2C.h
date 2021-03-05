@@ -1,68 +1,77 @@
-
-/*
- * File            : I2C.h
- * Author          : Ligo George
- * Company         : electroSome
- * Project         : I2C Library for MPLAB XC8
- * Microcontroller : PIC 16F877A
- * Created on April 15, 2017, 5:59 PM
- * Link: https://electrosome.com/i2c-pic-microcontroller-mplab-xc8/
- * Modificada por: Pablo Mazariegos con la ayuda del auxiliar Gustavo Ordoñez 
- * Basado en Link: http://microcontroladores-mrelberni.com/i2c-pic-comunicacion-serial/
- */
-//Librería obtenida adel repositorio de la clase
-
-// This is a guard condition so that contents of this file are not included
-// more than once.  
-#ifndef I2C
-#define	I2C
-
-#include <xc.h> // include processor files - each processor file is guarded.  
-#include <pic16f887.h>
-#include <stdint.h>
-
-#ifndef _XTAL_FREQ
+#ifndef I2C_H
+#define I2C_H
+//------------------------------------------------------------------------------
+#include "I2C_Pins.h"
+//------------------------------------------------------------------------------
+#define  ACK  0
+#define  NACK 1
 #define _XTAL_FREQ 4000000
-#endif
+//--------------Function Purpose: Configure I2C module--------------------------
+void I2C_init(unsigned char speed)
+{
+  SCK_dir = 1;		// SCK pins input
+  SDA_dir = 1;		// Make SDA and
 
-//*****************************************************************************
-// Función para inicializar I2C Maestro
-//*****************************************************************************
-void I2C_Master_Init(const unsigned long c);
-//*****************************************************************************
-// Función de espera: mientras se esté iniciada una comunicación,
-// esté habilitado una recepción, esté habilitado una parada
-// esté habilitado un reinicio de la comunicación, esté iniciada
-// una comunicación o se este transmitiendo, el IC2 PIC se esperará
-// antes de realizar algún trabajo
-//*****************************************************************************
-void I2C_Master_Wait(void);
-//*****************************************************************************
-// Función de inicio de la comunicación I2C PIC
-//*****************************************************************************
-void I2C_Master_Start(void);
-//*****************************************************************************
-// Función de reinicio de la comunicación I2C PIC
-//*****************************************************************************
-void I2C_Master_RepeatedStart(void);
-//*****************************************************************************
-// Función de parada de la comunicación I2C PIC
-//*****************************************************************************
-void I2C_Master_Stop(void);
-//*****************************************************************************
-//Función de transmisión de datos del maestro al esclavo
-//esta función devolverá un 0 si el esclavo a recibido
-//el dato
-//*****************************************************************************
-void I2C_Master_Write(unsigned d);
-//*****************************************************************************
-//Función de recepción de datos enviados por el esclavo al maestro
-//esta función es para leer los datos que están en el esclavo
-//*****************************************************************************
-unsigned short I2C_Master_Read(unsigned short a);
-//*****************************************************************************
-// Función para inicializar I2C Esclavo
-//*****************************************************************************
-void I2C_Slave_Init(uint8_t address);
-//*****************************************************************************
-#endif	/* __I2C_H */
+  SSPADD  = ((_XTAL_FREQ/4000)/speed) - 1;
+  SSPSTAT = 0x80;		// Slew Rate control is disabled
+  SSPCON  = 0x28;		// Select and enable I2C in master mode
+}
+//---------------Function Purpose: I2C_Start sends start bit sequence-----------
+void I2C_start(void)
+{
+  SEN = 1;			// Send start bit
+  while(!SSPIF);		// Wait for it to complete
+  SSPIF = 0;			// Clear the flag bit
+}
+//---------------Function Purpose: I2C_ReStart sends start bit sequence---------
+void I2C_restart(void)
+{
+  RSEN = 1;			// Send Restart bit
+  while(!SSPIF);		// Wait for it to complete
+  SSPIF = 0;			// Clear the flag bit
+}
+//---------------Function : I2C_Stop sends stop bit sequence--------------------
+void I2C_stop(void)
+{
+  PEN = 1;			// Send stop bit
+  while(!SSPIF);		// Wait for it to complete
+  SSPIF = 0;			// Clear the flag bit
+}
+//---------------Function : Send ACK/NACK bit sequence--------------------------
+void I2C_ack(char acknowledge)
+{
+  ACKDT = acknowledge;	        // 0 means ACK, 1 means NACK
+  ACKEN = 1;			// Send ACKDT value
+  while(!SSPIF);		// Wait for it to complete
+  SSPIF = 0;			// Clear the flag bit
+}
+//---------------Function Purpose: I2C_Write_Byte transfers one byte------------
+unsigned char I2C_write(unsigned char data)
+{
+  SSPBUF = data;		// Send Byte value
+  while(!SSPIF);		// Wait for it to complete
+  SSPIF = 0;			// Clear the flag bit
+
+  return ACKSTAT;		// Return ACK/NACK from slave
+}
+//----------------Function Purpose: I2C_Read_Byte reads one byte----------------
+unsigned char I2C_read(char acknowledge)
+{
+   RCEN = 1;			// Enable reception of 8 bits
+   while(!SSPIF);		// Wait for it to complete
+   SSPIF = 0;			// Clear the flag bit
+   I2C_ack(acknowledge);
+
+   return SSPBUF;		// Return received byte
+}
+//------------------------------------------------------------------------------
+/*OR R/nW bit with SEN, RSEN, PEN, RCEN or ACKEN will indicate if the MSSP is in
+ * Idle mode*/
+char I2C_busy()
+{
+  char isBusy = (SSPCON2  & 0x1F) | R_W;
+
+  return isBusy;
+}
+//------------------------------------------------------------------------------
+#endif

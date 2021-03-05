@@ -2631,12 +2631,48 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 9 "main.c" 2
 
-# 1 "./I2C.h" 1
-# 22 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 22 "./I2C.h" 2
-# 31 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 1 3
+
+
+
+# 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__size_t.h" 1 3
+
+
+
+typedef unsigned size_t;
+# 4 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
+
+# 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__null.h" 1 3
+# 5 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdarg.h" 1 3
+
+
+
+
+
+
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+# 11 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
+# 43 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
+struct __prbuf
+{
+ char * ptr;
+ void (* func)(char);
+};
+# 85 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\conio.h" 1 3
 
 
 
@@ -2644,35 +2680,135 @@ void I2C_Master_Init(const unsigned long c);
 
 
 
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\errno.h" 1 3
+# 29 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\errno.h" 3
+extern int errno;
+# 8 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\conio.h" 2 3
 
 
 
 
+extern void init_uart(void);
 
-void I2C_Master_Write(unsigned d);
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
 
 
 
+extern char * cgets(char *);
+extern void cputs(const char *);
+# 85 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 2 3
 
-unsigned short I2C_Master_Read(unsigned short a);
+
+
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
 
 
 
-void I2C_Slave_Init(uint8_t address);
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+# 180 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdio.h" 3
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
 # 10 "main.c" 2
+
+# 1 "./I2C.h" 1
+
+
+
+# 1 "./I2C_Pins.h" 1
+# 4 "./I2C.h" 2
+
+
+
+
+
+
+void I2C_init(unsigned char speed)
+{
+  TRISC3 = 1;
+  TRISC4 = 1;
+
+  SSPADD = ((4000000/4000)/speed) - 1;
+  SSPSTAT = 0x80;
+  SSPCON = 0x28;
+}
+
+void I2C_start(void)
+{
+  SEN = 1;
+  while(!SSPIF);
+  SSPIF = 0;
+}
+
+void I2C_restart(void)
+{
+  RSEN = 1;
+  while(!SSPIF);
+  SSPIF = 0;
+}
+
+void I2C_stop(void)
+{
+  PEN = 1;
+  while(!SSPIF);
+  SSPIF = 0;
+}
+
+void I2C_ack(char acknowledge)
+{
+  ACKDT = acknowledge;
+  ACKEN = 1;
+  while(!SSPIF);
+  SSPIF = 0;
+}
+
+unsigned char I2C_write(unsigned char data)
+{
+  SSPBUF = data;
+  while(!SSPIF);
+  SSPIF = 0;
+
+  return ACKSTAT;
+}
+
+unsigned char I2C_read(char acknowledge)
+{
+   RCEN = 1;
+   while(!SSPIF);
+   SSPIF = 0;
+   I2C_ack(acknowledge);
+
+   return SSPBUF;
+}
+
+
+
+char I2C_busy()
+{
+  char isBusy = (SSPCON2 & 0x1F) | R_W;
+
+  return isBusy;
+}
+# 11 "main.c" 2
 
 # 1 "./LM75.h" 1
 
@@ -2680,21 +2816,109 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 8 "./LM75.h" 2
-
-
-
-
+# 1 "./LM75_Prototypes.h" 1
+# 11 "./LM75_Prototypes.h"
 void LM75_init(void);
 float LM75_read(char regAddress);
 void LM75_setConfig(char data);
 char LM75_readConfig(void);
 void LM75_set(char regAddress, int data);
 float toFloat(signed int tempr);
-# 11 "main.c" 2
+# 6 "./LM75.h" 2
+
+
+void LM75_init()
+{
+  I2C_init(100000);
+
+
+  LM75_set(0x03,0x2380);
+  LM75_set(0x02,0x1E80);
+}
+
+float LM75_read(char regAddress)
+{
+  signed int MSB,LSB;
+
+  I2C_start();
+
+  I2C_write(0x90 + 0);
+  I2C_write(regAddress);
+  I2C_restart();
+  I2C_write(0x90 + 1);
+  MSB = I2C_read(0);
+  LSB = I2C_read(1);
+
+  I2C_stop();
+
+  return toFloat((MSB << 8) + LSB);
+}
+
+void LM75_setConfig(char data)
+{
+  I2C_start();
+
+  I2C_write(0x90);
+  I2C_write(0x01);
+  I2C_write(data);
+
+  I2C_stop();
+}
+
+char LM75_readConfig()
+{
+  I2C_start();
+
+  I2C_write(0x90 + 0);
+  I2C_write(0x01);
+  I2C_restart();
+  I2C_write(0x90 + 1);
+  char config = I2C_read(1);
+
+  I2C_stop();
+
+  return config;
+}
+
+void LM75_set(char regAddress, int data)
+{
+  I2C_start();
+
+  I2C_write(0x90);
+  I2C_write(regAddress);
+  I2C_write(data>>8);
+  I2C_write(data);
+
+  I2C_stop();
+}
+
+float toFloat(signed int tempr)
+{
+  float result = (float)(tempr>>8);
+  char isfraction = tempr & 0x0080;
+
+  if(isfraction)
+  {
+    result = result + 0.5;
+  }
+
+  return (result);
+}
+# 12 "main.c" 2
+
+# 1 "./UART.h" 1
+
+
+
+
+
+
+
+
+void INIT_UART (void);
+void write (char *entrada);
+void read (void);
+# 13 "main.c" 2
 
 
 
@@ -2715,10 +2939,119 @@ float toFloat(signed int tempr);
 
 #pragma config BOR4V = BOR40V
 #pragma config WRT = OFF
+# 46 "main.c"
+#pragma config FOSC = INTRC_CLKOUT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config MCLRE = OFF
+#pragma config CP = OFF
+#pragma config CPD = OFF
+#pragma config BOREN = OFF
+#pragma config IESO = OFF
+#pragma config FCMEN = OFF
+#pragma config LVP = OFF
+
+
+#pragma config BOR4V = BOR40V
+#pragma config WRT = OFF
 
 
 
 
+
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
+
+
+
+
+
+
+typedef unsigned short wchar_t;
+
+
+
+
+
+
+
+typedef struct {
+ int rem;
+ int quot;
+} div_t;
+typedef struct {
+ unsigned rem;
+ unsigned quot;
+} udiv_t;
+typedef struct {
+ long quot;
+ long rem;
+} ldiv_t;
+typedef struct {
+ unsigned long quot;
+ unsigned long rem;
+} uldiv_t;
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+
+
+
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+
+
+
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+# 104 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+# 66 "main.c" 2
+
+
+
+
+
+
+char out[15] = {0};
 
 void setup (void);
 void setup(void){
@@ -2726,12 +3059,18 @@ void setup(void){
     PORTB = 0;
 
 }
+void main(void)
+{
+  LM75_init();
 
-void main(void) {
-    LM75_init();
-    setup();
-    while(1){
-        PORTB = LM75_read(0x00);
-        _delay((unsigned long)((1000)*(4000000/4000.0)));
-    }
+  setup ();
+
+  while(1)
+  {
+
+
+    PORTB = LM75_read(0x00);
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
+
+  }
 }

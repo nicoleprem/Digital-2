@@ -1,21 +1,86 @@
-//Librería hecha en base a https://libstock.mikroe.com/projects/view/3755/lm75-i2c-temperature-sensor
-//Creada por Bugs Bensce
-
-#ifndef LM75
-#define	LM75
-
-#include <xc.h> // include processor files - each processor file is guarded. 
-#include <stdint.h>
-
-//#define  FRACTION_FLAG = 0x0080   // 0.5 Bit Flag
+#ifndef LM75_H
+#define	LM75_H
 //------------------------------------------------------------------------------
-void  LM75_init(void);
-float LM75_read(char regAddress);
-void  LM75_setConfig(char data);
-char  LM75_readConfig(void);
-void  LM75_set(char regAddress, int data);
-float toFloat(signed int tempr);
+#include "I2C.h"
+#include <xc.h>
+#include "LM75_Prototypes.h"
 //------------------------------------------------------------------------------
-
-
-#endif	/* XC_HEADER_TEMPLATE_H */
+void LM75_init()
+{
+  I2C_init(100000);   //Start at 100Kb/s
+  
+  //For Thermostat functions ONLY... can be left out if so wished and device will still read Tempr
+  LM75_set(TOS_ADDRESS,0x2380);     //Over Temperature Threshold Activate - I set it to 35.50C
+  LM75_set(THYST_ADDRESS,0x1E80);   //Over Temperature Threshold deactivate - I set it to 30.50C
+}
+//------------------------------------------------------------------------------
+float LM75_read(char regAddress)
+{
+  signed int MSB,LSB;
+  
+  I2C_start();                      
+  
+  I2C_write(LM75_ADDRESS + 0);        // 0 = Write             
+  I2C_write(regAddress);        
+  I2C_restart();                           
+  I2C_write(LM75_ADDRESS + 1);        // 1 = Read   
+  MSB = I2C_read(ACK);
+  LSB = I2C_read(NACK);
+  
+  I2C_stop();
+//  
+  return toFloat((MSB << 8) + LSB);
+}
+//------------------------------------------------------------------------------
+void LM75_setConfig(char data)
+{  
+  I2C_start();                      
+  
+  I2C_write(LM75_ADDRESS);                       
+  I2C_write(CONFIGURATION_ADDRESS);              
+  I2C_write(data);       
+  
+  I2C_stop();
+}
+//------------------------------------------------------------------------------
+char LM75_readConfig()
+{  
+  I2C_start();                      
+  
+  I2C_write(LM75_ADDRESS + 0);        // 0 = Write               
+  I2C_write(CONFIGURATION_ADDRESS);        
+  I2C_restart();                           
+  I2C_write(LM75_ADDRESS + 1);        // 1 = Read   
+  char config = I2C_read(NACK);
+  
+  I2C_stop();
+  
+  return config;
+}
+//------------------------------------------------------------------------------
+void LM75_set(char regAddress, int data)
+{  
+  I2C_start();                      
+  
+  I2C_write(LM75_ADDRESS);                    
+  I2C_write(regAddress);      //Registers: Config,THYST,OVER TEMP SINK (OS) /*See Datasheet*/                       
+  I2C_write(data>>8);         //MSByte       
+  I2C_write(data);            //LSByte
+  
+  I2C_stop();
+}
+//------------------------------------------------------------------------------
+float toFloat(signed int tempr)
+{
+  float result = (float)(tempr>>8);      //Discard LSByte (Only holds fraction flag bit - see datasheet)
+  char isfraction = tempr & FRACTION_FLAG;          
+  
+  if(isfraction) 
+  {
+    result = result + 0.5;
+  }
+  
+  return (result);
+}
+//------------------------------------------------------------------------------
+#endif
