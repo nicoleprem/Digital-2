@@ -53,17 +53,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 "16
 [; ;./LM75_Prototypes.h: 16: float toFloat(signed int tempr);
 [v _toFloat `(f ~T0 @X0 0 ef1`i ]
-"1478 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+"3387 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
+[v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
+"3449
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3449: extern volatile unsigned char ANSELH __attribute__((address(0x189)));
+[v _ANSELH `Vuc ~T0 @X0 0 e@393 ]
+"1478
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "228
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
 [v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"1540
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1540: extern volatile unsigned char TRISC __attribute__((address(0x087)));
+[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"290
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 290: extern volatile unsigned char PORTC __attribute__((address(0x007)));
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
+"1602
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
+[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
+"352
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 [p mainexit ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"9 ./UART.h
+[; ;./UART.h: 9: void INIT_UART (void);
+[v _INIT_UART `(v ~T0 @X0 0 ef ]
+"194 C:\Program Files\Microchip\xc8\v2.31\pic\include\c90\stdio.h
+[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+[v F1437 `(v ~T0 @X0 1 tf1`ul ]
 "92 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
+[v __delay `JF1437 ~T0 @X0 0 e ]
 [p i __delay ]
+"10 ./UART.h
+[; ;./UART.h: 10: void write (char *entrada);
+[v _write `(v ~T0 @X0 0 ef1`*uc ]
+"6 main.c
+[p x FOSC  =  INTRC_CLKOUT ]
+"7
+[p x WDTE  =  OFF        ]
+"8
+[p x PWRTE  =  OFF       ]
+"9
+[p x MCLRE  =  OFF       ]
+"10
+[p x CP  =  OFF          ]
+"11
+[p x CPD  =  OFF         ]
+"12
+[p x BOREN  =  OFF       ]
+"13
+[p x IESO  =  OFF        ]
+"14
+[p x FCMEN  =  OFF       ]
+"15
+[p x LVP  =  OFF         ]
+"18
+[p x BOR4V  =  BOR40V    ]
+"19
+[p x WRT  =  OFF         ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -328,7 +378,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _SSPCON -> -> 40 `i `uc ]
 "18
 [; ;./I2C.h: 18: }
-[e :UE 139 ]
+[e :UE 143 ]
 }
 "20
 [; ;./I2C.h: 20: void I2C_start(void)
@@ -343,17 +393,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _SEN -> -> 1 `i `b ]
 "23
 [; ;./I2C.h: 23:   while(!SSPIF);
-[e $U 141  ]
-[e :U 142 ]
-[e :U 141 ]
-[e $ ! _SSPIF 142  ]
-[e :U 143 ]
+[e $U 145  ]
+[e :U 146 ]
+[e :U 145 ]
+[e $ ! _SSPIF 146  ]
+[e :U 147 ]
 "24
 [; ;./I2C.h: 24:   SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
 "25
 [; ;./I2C.h: 25: }
-[e :UE 140 ]
+[e :UE 144 ]
 }
 "27
 [; ;./I2C.h: 27: void I2C_restart(void)
@@ -368,17 +418,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _RSEN -> -> 1 `i `b ]
 "30
 [; ;./I2C.h: 30:   while(!SSPIF);
-[e $U 145  ]
-[e :U 146 ]
-[e :U 145 ]
-[e $ ! _SSPIF 146  ]
-[e :U 147 ]
+[e $U 149  ]
+[e :U 150 ]
+[e :U 149 ]
+[e $ ! _SSPIF 150  ]
+[e :U 151 ]
 "31
 [; ;./I2C.h: 31:   SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
 "32
 [; ;./I2C.h: 32: }
-[e :UE 144 ]
+[e :UE 148 ]
 }
 "34
 [; ;./I2C.h: 34: void I2C_stop(void)
@@ -393,17 +443,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _PEN -> -> 1 `i `b ]
 "37
 [; ;./I2C.h: 37:   while(!SSPIF);
-[e $U 149  ]
-[e :U 150 ]
-[e :U 149 ]
-[e $ ! _SSPIF 150  ]
-[e :U 151 ]
+[e $U 153  ]
+[e :U 154 ]
+[e :U 153 ]
+[e $ ! _SSPIF 154  ]
+[e :U 155 ]
 "38
 [; ;./I2C.h: 38:   SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
 "39
 [; ;./I2C.h: 39: }
-[e :UE 148 ]
+[e :UE 152 ]
 }
 "41
 [; ;./I2C.h: 41: void I2C_ack(char acknowledge)
@@ -426,17 +476,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _ACKEN -> -> 1 `i `b ]
 "45
 [; ;./I2C.h: 45:   while(!SSPIF);
-[e $U 153  ]
-[e :U 154 ]
-[e :U 153 ]
-[e $ ! _SSPIF 154  ]
-[e :U 155 ]
+[e $U 157  ]
+[e :U 158 ]
+[e :U 157 ]
+[e $ ! _SSPIF 158  ]
+[e :U 159 ]
 "46
 [; ;./I2C.h: 46:   SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
 "47
 [; ;./I2C.h: 47: }
-[e :UE 152 ]
+[e :UE 156 ]
 }
 "49
 [; ;./I2C.h: 49: unsigned char I2C_write(unsigned char data)
@@ -456,21 +506,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _SSPBUF _data ]
 "52
 [; ;./I2C.h: 52:   while(!SSPIF);
-[e $U 157  ]
-[e :U 158 ]
-[e :U 157 ]
-[e $ ! _SSPIF 158  ]
-[e :U 159 ]
+[e $U 161  ]
+[e :U 162 ]
+[e :U 161 ]
+[e $ ! _SSPIF 162  ]
+[e :U 163 ]
 "53
 [; ;./I2C.h: 53:   SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
 "55
 [; ;./I2C.h: 55:   return ACKSTAT;
 [e ) -> _ACKSTAT `uc ]
-[e $UE 156  ]
+[e $UE 160  ]
 "56
 [; ;./I2C.h: 56: }
-[e :UE 156 ]
+[e :UE 160 ]
 }
 "58
 [; ;./I2C.h: 58: unsigned char I2C_read(char acknowledge)
@@ -490,11 +540,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _RCEN -> -> 1 `i `b ]
 "61
 [; ;./I2C.h: 61:    while(!SSPIF);
-[e $U 161  ]
-[e :U 162 ]
-[e :U 161 ]
-[e $ ! _SSPIF 162  ]
-[e :U 163 ]
+[e $U 165  ]
+[e :U 166 ]
+[e :U 165 ]
+[e $ ! _SSPIF 166  ]
+[e :U 167 ]
 "62
 [; ;./I2C.h: 62:    SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
@@ -504,10 +554,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "65
 [; ;./I2C.h: 65:    return SSPBUF;
 [e ) _SSPBUF ]
-[e $UE 160  ]
+[e $UE 164  ]
 "66
 [; ;./I2C.h: 66: }
-[e :UE 160 ]
+[e :UE 164 ]
 }
 "70
 [; ;./I2C.h: 70: char I2C_busy()
@@ -524,10 +574,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "74
 [; ;./I2C.h: 74:   return isBusy;
 [e ) _isBusy ]
-[e $UE 164  ]
+[e $UE 168  ]
 "75
 [; ;./I2C.h: 75: }
-[e :UE 164 ]
+[e :UE 168 ]
 }
 "8 ./LM75.h
 [; ;./LM75.h: 8: void LM75_init()
@@ -548,7 +598,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _LM75_set (2 , -> -> 2 `i `uc -> 7808 `i ]
 "15
 [; ;./LM75.h: 15: }
-[e :UE 165 ]
+[e :UE 169 ]
 }
 "17
 [; ;./LM75.h: 17: float LM75_read(char regAddress)
@@ -594,10 +644,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32
 [; ;./LM75.h: 32:   return toFloat((MSB << 8) + LSB);
 [e ) ( _toFloat (1 + << _MSB -> 8 `i _LSB ]
-[e $UE 166  ]
+[e $UE 170  ]
 "33
 [; ;./LM75.h: 33: }
-[e :UE 166 ]
+[e :UE 170 ]
 }
 "35
 [; ;./LM75.h: 35: void LM75_setConfig(char data)
@@ -629,7 +679,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _I2C_stop ..  ]
 "44
 [; ;./LM75.h: 44: }
-[e :UE 167 ]
+[e :UE 171 ]
 }
 "46
 [; ;./LM75.h: 46: char LM75_readConfig()
@@ -664,10 +714,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "58
 [; ;./LM75.h: 58:   return config;
 [e ) _config ]
-[e $UE 168  ]
+[e $UE 172  ]
 "59
 [; ;./LM75.h: 59: }
-[e :UE 168 ]
+[e :UE 172 ]
 }
 "61
 [; ;./LM75.h: 61: void LM75_set(char regAddress, int data)
@@ -703,7 +753,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _I2C_stop ..  ]
 "71
 [; ;./LM75.h: 71: }
-[e :UE 169 ]
+[e :UE 173 ]
 }
 "73
 [; ;./LM75.h: 73: float toFloat(signed int tempr)
@@ -728,7 +778,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _isfraction -> & _tempr -> 128 `i `uc ]
 "78
 [; ;./LM75.h: 78:   if(isfraction)
-[e $ ! != -> _isfraction `i -> 0 `i 171  ]
+[e $ ! != -> _isfraction `i -> 0 `i 175  ]
 "79
 [; ;./LM75.h: 79:   {
 {
@@ -738,121 +788,106 @@ Version 4.0 HI-TECH Software Intermediate Code
 "81
 [; ;./LM75.h: 81:   }
 }
-[e :U 171 ]
+[e :U 175 ]
 "83
 [; ;./LM75.h: 83:   return (result);
 [e ) _result ]
-[e $UE 170  ]
+[e $UE 174  ]
 "84
 [; ;./LM75.h: 84: }
-[e :UE 170 ]
+[e :UE 174 ]
 }
-"19 main.c
-[p x FOSC  =  INTRC_CLKOUT ]
-"20
-[p x WDTE  =  OFF        ]
-"21
-[p x PWRTE  =  OFF       ]
-"22
-[p x MCLRE  =  OFF       ]
-"23
-[p x CP  =  OFF          ]
-"24
-[p x CPD  =  OFF         ]
-"25
-[p x BOREN  =  OFF       ]
-"26
-[p x IESO  =  OFF        ]
-"27
-[p x FCMEN  =  OFF       ]
-"28
-[p x LVP  =  OFF         ]
-"31
-[p x BOR4V  =  BOR40V    ]
-"32
-[p x WRT  =  OFF         ]
-"46
-[p x FOSC  =  INTRC_CLKOUT ]
-"47
-[p x WDTE  =  OFF        ]
-"48
-[p x PWRTE  =  OFF       ]
-"49
-[p x MCLRE  =  OFF       ]
-"50
-[p x CP  =  OFF          ]
-"51
-[p x CPD  =  OFF         ]
-"52
-[p x BOREN  =  OFF       ]
-"53
-[p x IESO  =  OFF        ]
-"54
-[p x FCMEN  =  OFF       ]
-"55
-[p x LVP  =  OFF         ]
-"58
-[p x BOR4V  =  BOR40V    ]
-"59
-[p x WRT  =  OFF         ]
-"72
-[; ;main.c: 72: char out[15] = {0};
-[v _out `uc ~T0 @X0 -> 15 `i e ]
-[i _out
-:U ..
--> -> 0 `i `uc
-..
-]
-"75
-[; ;main.c: 75: void setup(void){
+"33 main.c
+[; ;main.c: 33: char out[20];
+[v _out `uc ~T0 @X0 -> 20 `i e ]
+"35
+[; ;main.c: 35: float x;
+[v _x `f ~T0 @X0 1 e ]
+"38
+[; ;main.c: 38: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"76
-[; ;main.c: 76:     TRISB = 0;
+"39
+[; ;main.c: 39:     ANSEL = 0;
+[e = _ANSEL -> -> 0 `i `uc ]
+"40
+[; ;main.c: 40:     ANSELH = 0;
+[e = _ANSELH -> -> 0 `i `uc ]
+"41
+[; ;main.c: 41:     TRISB = 0;
 [e = _TRISB -> -> 0 `i `uc ]
-"77
-[; ;main.c: 77:     PORTB = 0;
+"42
+[; ;main.c: 42:     PORTB = 0;
 [e = _PORTB -> -> 0 `i `uc ]
-"79
-[; ;main.c: 79: }
+"44
+[; ;main.c: 44:     TRISC = 0b10000000;
+[e = _TRISC -> -> 128 `i `uc ]
+"45
+[; ;main.c: 45:     PORTC = 0;
+[e = _PORTC -> -> 0 `i `uc ]
+"46
+[; ;main.c: 46:     TRISD = 0b00000000;
+[e = _TRISD -> -> 0 `i `uc ]
+"47
+[; ;main.c: 47:     PORTD = 0b00000000;
+[e = _PORTD -> -> 0 `i `uc ]
+"49
+[; ;main.c: 49: }
 [e :UE 176 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"80
-[; ;main.c: 80: void main(void)
+"50
+[; ;main.c: 50: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"81
-[; ;main.c: 81: {
+"51
+[; ;main.c: 51: {
 {
 [e :U _main ]
 [f ]
-"82
-[; ;main.c: 82:   LM75_init();
-[e ( _LM75_init ..  ]
-"84
-[; ;main.c: 84:   setup ();
+"54
+[; ;main.c: 54:   setup ();
 [e ( _setup ..  ]
-"86
-[; ;main.c: 86:   while(1)
+"55
+[; ;main.c: 55:   LM75_init();
+[e ( _LM75_init ..  ]
+"56
+[; ;main.c: 56:   INIT_UART();
+[e ( _INIT_UART ..  ]
+"58
+[; ;main.c: 58:   while(1)
 [e :U 179 ]
-"87
-[; ;main.c: 87:   {
+"59
+[; ;main.c: 59:   {
 {
-"90
-[; ;main.c: 90:     PORTB = LM75_read(0x00);
-[e = _PORTB -> ( _LM75_read (1 -> -> 0 `i `uc `uc ]
-"91
-[; ;main.c: 91:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+"60
+[; ;main.c: 60:     sprintf(out,"%3.0f",LM75_read(0x00));
+[e ( _sprintf (1 , (. , &U _out :s 1C -> ( _LM75_read (1 -> -> 0 `i `uc `d ]
+"63
+[; ;main.c: 63:     _delay((unsigned long)((3000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"65
+[; ;main.c: 65:     write(out);
+[e ( _write (1 &U _out ]
+"66
+[; ;main.c: 66:     write(0xA);
+[e ( _write (1 -> -> 10 `i `*uc ]
+"68
+[; ;main.c: 68:      PORTD= 0b00000001;
+[e = _PORTD -> -> 1 `i `uc ]
+"69
+[; ;main.c: 69:         _delay((unsigned long)((1000)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"93
-[; ;main.c: 93:   }
+"70
+[; ;main.c: 70:   }
 }
 [e :U 178 ]
 [e $U 179  ]
 [e :U 180 ]
-"94
-[; ;main.c: 94: }
+"71
+[; ;main.c: 71: }
 [e :UE 177 ]
 }
+[p f _sprintf 8495104 ]
+[a 1C 37 51 46 48 102 0 ]

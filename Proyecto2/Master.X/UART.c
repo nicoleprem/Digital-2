@@ -6,7 +6,7 @@
 //Misma librería del Lab3
 
 #include <xc.h>
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 4000000
 void INIT_UART (void) {
     TRISCbits.TRISC7=1 ;
     TXSTAbits.SYNC = 0;
