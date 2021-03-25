@@ -18,11 +18,10 @@ unsigned char contadorJ2 = 0; //Contador del jugador 2, si llega a 8 gana
 unsigned int bandera = 1; //bandera para identificar al ganador
 unsigned int banderaJ1=0; //bandera para identificar si se apachó el botón del J1
 unsigned int banderaJ2=0; //bandera para identificar si se apachó el botón del J2
-char debounce=0;
-int BotonJ1_State=0;
-int BotonJ2_State=0;
-int flagJ=0;
-//const int buttonPin = PUSH2;     // the number of the pushbutton pin DECLARACIÓN DEL PUSH 2
+char debounce=0; //bandera utilizada para implementar el antirrebote
+int BotonJ1_State=0; //Estado del botón 1
+int BotonJ2_State=0; //Estado del boton 2
+int flagJ=0; //bandera para el antirrebote del semáforo la cual cambia dependiendo quién presionó el botón
 
 
 //********************************************************************************
@@ -33,14 +32,13 @@ void ledsJ1 (unsigned char C1); //función para mostrar los leds del jugador 1
 void ledsJ2 (unsigned char C2); //función para mostrar los leds del jugador 2
 
 
-
 void setup() {
   pinMode(LEDR, OUTPUT); //Definición del led rojo como output
   pinMode(LEDV, OUTPUT); //Definición del led verde como output
   pinMode(BotonJ1, INPUT_PULLUP); //Definición del botón del jugador 1 como input en pullup
   pinMode(BotonJ2, INPUT_PULLUP); //Definición del botón del jugador 2 como input en pullup
 //  pinMode(RESET, INPUT_PULLUP);
-  //LEDS JUGADOR 1
+  //PINES PARA LOS LEDS JUGADOR 1
   pinMode(PB_5, OUTPUT); //Led0 del jugador 1
   pinMode(PB_0, OUTPUT); //Led1 del jugador 1
   pinMode(PB_1, OUTPUT); //Led2 del jugador 1
@@ -49,7 +47,7 @@ void setup() {
   pinMode(PB_4, OUTPUT); //Led5 del jugador 1
   pinMode(PA_5, OUTPUT); //Led6 del jugador 1
   pinMode(PA_6, OUTPUT); //Led7 del jugador 1
-  //LEDS JUGADOR 2
+  //PINES PARA LOS LEDS JUGADOR 2
   pinMode(PD_0, OUTPUT); //Led0 del jugador 2
   pinMode(PD_1, OUTPUT); //Led1 del jugador 2
   pinMode(PD_2, OUTPUT); //Led2 del jugador 2
@@ -58,13 +56,10 @@ void setup() {
   pinMode(PE_2, OUTPUT); //Led5 del jugador 2
   pinMode(PE_3, OUTPUT); //Led6 del jugador 2
   pinMode(PD_6, OUTPUT); //Led7 del jugador 2
-  //Función del semáforo
-  //semaforo ();
-
 }
 
 void loop() {
-   
+   //Condiciones iniciales:
    contadorJ1 = 0;
    contadorJ2 = 0;
    ledsJ1(contadorJ1);
@@ -75,6 +70,7 @@ void loop() {
    BotonJ2_State=digitalRead(BotonJ2);
    debounce=0;
    flagJ=0;
+   //Determinación de quién presionó el botón de inicio junto con antirrebote del mismo botón
    if(BotonJ1_State==LOW or BotonJ2_State==LOW){
     if (BotonJ1_State==LOW){
       flagJ=2;
@@ -109,8 +105,8 @@ void loop() {
                       }
                     }
                      delay(200);    
-                      contadorJ1++;
-                      ledsJ1(contadorJ1);
+                      contadorJ1++; //se incrementa el contador 
+                      ledsJ1(contadorJ1); //se va a la función ledsJ1 para encender los leds del jugador 1
                       
                       if (contadorJ1 == 8) { //verificación si ya ganó
                           bandera = 2; //se sale del ciclo 
@@ -125,8 +121,8 @@ void loop() {
                       }
                  }
                       delay(200);
-                      contadorJ2++;
-                      ledsJ2(contadorJ2);
+                      contadorJ2++; //se incrementa el contador
+                      ledsJ2(contadorJ2); //se va a la función ledsJ2 para encender los leds del jugador 2
 
                       if (contadorJ2 == 8) { //verificación si ya ganó
                           bandera = 2; //se sale del ciclo
@@ -161,7 +157,7 @@ void semaforo (void){
 // Rutina para desplegar los leds del J1
 void ledsJ1(unsigned char C1) {
     if (C1 == 8) { //se verifica si ya presionó el botón 8 veces y si ya ganó entonces se enciende el led azul trez veces
-        digitalWrite(PA_5,LOW);
+        digitalWrite(PA_5,LOW); //se apaga el led 6
         digitalWrite(PA_6, HIGH); //se enciende led 7
         digitalWrite(LEDV, HIGH);
         delay(1000);
