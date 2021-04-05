@@ -9,8 +9,8 @@ File myFile;
 //**************************************************************************************************************
 //Prototipos de funciones
 //**************************************************************************************************************
-void printDirectory(File dir, int numTabs); //Prototipo de función
-void menu (int personajes);
+void printDirectory(File dir, int numTabs); //Función obtenida del ejemplo para imprimir lo que hay en la SD
+void menu (int personajes); //Función para mostrar lo que hay en la SD
 //**************************************************************************************************************
 //Variables
 //**************************************************************************************************************
@@ -18,12 +18,11 @@ int inByte; //variable que tiene el valor de lo que se ingresa en la terminal
 int personajes; //variable para desplegar los personajes disponibles
 
 void setup() {
-  // put your setup code here, to run once
   //Inicia código para abrir los archivos en SD******************//
   // Open serial communications and wait for port to open:
 
   Serial.begin(115200);
-  SPI.setModule(0);
+  SPI.setModule(0); //Activar la comunicación SPI
 
   Serial.print("Initializing SD card...");
   pinMode(PA_3, OUTPUT);
@@ -35,32 +34,30 @@ void setup() {
   Serial.println("initialization done.");
 
   menu(1);
-  //
-
 }
 
 void loop() {
-
-  //personajes=0;
+  //Comprobar disponibilidad la comunicación
   if (Serial.available()) {
     //char inByte;
     inByte = Serial.read();
-    //Para mostrar a Yoshi se debe de mandar 1 a la terminal
+
   }
+  //Para mostrar a Yoshi se debe de mandar 1 a la terminal
   if (inByte == '1') {
-    myFile = SD.open("Yoshi.txt"); //"nombre del archivo"
+    myFile = SD.open("Yoshi.txt"); //Abrir la imagen de Yoshi
     if (myFile) {
 
-      // read from the file until there's nothing else in it:
+      //leer el archivo
       while (myFile.available()) {
         Serial.write(myFile.read());
       }
-      // close the file:
+      //cerrar el archivo
       myFile.close();
       menu(1);
     } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening test.txt");
+      //si no se abre el archivo mostrar que hubo un error
+      Serial.println("error opening Yoshi.txt");
       menu(1);
     }
     inByte = 0;
@@ -68,47 +65,42 @@ void loop() {
 
   //Para mostrar a Toad se debe mandar 2 a la terminal
   else if (inByte == '2') {
-    myFile = SD.open("Toad.txt"); //"nombre del archivo"
+    myFile = SD.open("Toad.txt"); //Abrir la imagen de Toad
     if (myFile) {
 
-      // read from the file until there's nothing else in it:
+      //leer el archivo
       while (myFile.available()) {
         Serial.write(myFile.read());
       }
-      // close the file:
+      //cerrar el archivo
       myFile.close();
       menu(1);
     } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening test.txt");
+      //si no se abre el archivo mostrar que hubo un error
+      Serial.println("error opening Toad.txt");
       menu(1);
     }
     inByte = 0;
   }
-
+ //Para mostrar a Boo se debe mandar 3 a la terminal
   else if (inByte == '3') {
-    myFile = SD.open("Boo.txt"); //"nombre del archivo"
+    myFile = SD.open("Boo.txt"); //Abrir la imagen de Boo
     if (myFile) {
 
-      // read from the file until there's nothing else in it:
+      //leer el archivo
       while (myFile.available()) {
         Serial.write(myFile.read());
-
-
       }
-      // close the file:
+      //cerrar el archivo
       myFile.close();
       menu(1);
     } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening test.txt");
+      //si no se abre el archivo mostrar que hubo un error
+      Serial.println("error opening Boo.txt");
       menu(1);
     }
     inByte = 0;
   }
-
-
-
 }
 
 //**************************************************************************************************************
@@ -132,26 +124,25 @@ void printDirectory(File dir) {
 }
 
 void menu (int personajes) {
-
+  
   if (personajes == 1) {
     Serial.println();
     Serial.println("Escoja la opcion a desplegar");
     root = SD.open("/");
     root.rewindDirectory();
-    //printDirectory(root);
     while (true) {
-
+      //Abrir los archivos que existen en la SD
       File entry =  root.openNextFile();
       if (! entry) {
         // no more files
         break;
       }
-
+      //Imprimir los nombres de los archivos en la SD
       Serial.println(entry.name());
-
+      //Cerrar los archivos en la SD
       entry.close();
     }
-    Serial.println("done!");
+    //Serial.println("done!");
   }
 
 }
