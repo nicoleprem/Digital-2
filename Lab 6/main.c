@@ -31,11 +31,7 @@ int main(void)
     while(1)
     {
         if (!GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_4)){
-                    GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x02); //Máscara = 10, se enciende el rojo
-                    for (i=0;i<2000000;i++){} //delay
 
-                    GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x00); //Máscara = 1010, se enciende rojo y verde para crear amarillo
-                    for (i=0;i<2000000;i++){}
 
                     GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x08); //Máscara = 1000, se enciende verde
                     for (i=0;i<2000000;i++){}
@@ -60,6 +56,17 @@ int main(void)
 
                     GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x00); //Se apagan todos
                     for (i=0;i<1000000;i++){}
+
+                    GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x00); //Máscara = 1010, se enciende rojo y verde para crear amarillo
+                    for (i=0;i<2000000;i++){}
+
+                    GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x02); //Máscara = 10, se enciende el rojo
+                    for (i=0;i<2000000;i++){} //delay
+
+                    GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3|GPIO_PIN_2|GPIO_PIN_1,0x00); //Se apagan todos
+                     for (i=0;i<1000000;i++){}
+
+
                 }
 
             }
