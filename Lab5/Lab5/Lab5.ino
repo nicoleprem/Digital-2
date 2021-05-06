@@ -45,7 +45,7 @@ void loop() {
   }
   //Para mostrar a Yoshi se debe de mandar 1 a la terminal
   if (inByte == '1') {
-    myFile = SD.open("Yoshi.txt"); //Abrir la imagen de Yoshi
+    myFile = SD.open("Fondo.txt"); //Abrir la imagen de Yoshi
     if (myFile) {
 
       //leer el archivo
